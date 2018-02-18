@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8" />
+<base href="/">
+<link rel="apple-touch-icon" sizes="76x76"
+	href="../assets/img/apple-icon.png" />
+<link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<title data-ng-bind="globalCommonTitle"></title>
+<meta
+	content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0'
+	name='viewport' />
+<meta name="viewport" content="width=device-width" />
+<link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
+<link href="../assets/css/material-dashboard.css?v=1.2.0"
+	rel="stylesheet" />
+<link href="../assets/css/demo.css" rel="stylesheet" />
+<link href="../assets/css/font-awesome.min.css" rel="stylesheet">
+<link
+	href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons'
+	rel='stylesheet' type='text/css'>
+<script src="../assets/js/jquery-3.2.1.min.js" type="text/javascript"></script>
+<script src="../assets/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="../assets/js/material.min.js" type="text/javascript"></script>
+<script src="../assets/js/chartist.min.js"></script>
+<script src="../assets/js/arrive.min.js"></script>
+<script src="../assets/js/perfect-scrollbar.jquery.min.js"></script>
+<script src="../assets/js/bootstrap-notify.js"></script>
+<script src="../assets/js/material-dashboard.js?v=1.2.0"></script>
+<script src="../assets/js/demo.js"></script>
+<script src="../assets/js/angular/angular.min.js"></script>
+<script src="../assets/js/angular/angular-ui-router.min.js"></script>
+<script src="../assets/js/angular/angular-cookies.js"></script>
+<script src="../assets/js/angular/angular-messages.js"></script>
+<script src="lamsAdminApp.js"></script>
+<script src="common/controllers/loginCtrl.js"></script>
+<script src="common/controllers/signupCtrl.js"></script>
+<script src="common/utils/lamsConstant.js"></script>
+<script src="common/services/httpService.js"></script>
+<script src="common/services/userService.js"></script>
+<script src="common/directives/commonDirectives.js"></script>
+<script src="dashboard/dashboardCtrl.js"></script>
+<script src="user/dashboardCtrl.js"></script>
+
+
+<script type="text/ng-template" id="error-messages">
+        <div class="error-hover-text" ng-message="required">
+            <small class="error-msg-style">Input value</small>
+        </div>
+		<div class="error-hover-text" ng-message="email">
+            <small class="error-msg-style">Please Enter Valid Email Address</small>
+        </div>
+	   <div class="error-hover-text" ng-message="minlength">
+            <small class="error-msg-style">The value for this field is too short</small>
+        </div>
+	   <div class="error-hover-text" ng-message="maxlength">
+            <span class="error-icon">?</span>
+            <small class="error-msg-style">The value for this field is too long</small>
+        </div>
+       <div class="error-hover-text" ng-message="pattern">
+            <span class="error-icon">?</span>
+            <small class="error-msg-style">You did not enter the value in the correct format</small>
+        </div>
+
+	   <div class="error-hover-text" ng-message="max">
+            <span class="error-icon">?</span>
+            <small class="error-msg-style">Input exceeds maximum value</small>
+        </div>
+       <div class="error-hover-text" ng-message="min">
+            <span class="error-icon">?</span>
+            <small class="error-msg-style">Input valid minimum value</small>
+        </div>
+
+       <div class="error-hover-text" ng-message="number">
+            <span class="error-icon">?</span>
+            <small class="error-msg-style">Enter only digits</small>
+        </div>	
+		
+		<div class="error-hover-text" ng-message="yrPreviousValidationError">
+            <span class="error-icon">?</span>
+            <small class="error-msg-style">Previous and Current Year Exp exceeds Total Exp</small>
+        </div>
+
+		<div class="error-hover-text" ng-message="yrTotalValidationError">
+            <span class="error-icon">?</span>
+            <small class="error-msg-style">Total Job Exp can't be less than Current Job Exp</small>
+        </div>
+
+        <div class="error-hover-text" ng-message="ebitdaValidation">
+            <span class="error-icon">?</span>
+            <small class="error-msg-style">EBITDA should be less or equal to Sales.</small>
+        </div>
+
+        <div class="error-hover-text" ng-message="patValidation">
+            <span class="error-icon">?</span>
+            <small class="error-msg-style">PAT should be less or equal to EBITDA.</small>
+        </div>
+
+        <div class="error-hover-text" ng-message="minAchievementYear">
+            <span class="error-icon">?</span>
+            <small class="error-msg-style">Achievement year cannot be before Establishment year.</small>
+        </div>
+
+		<div class="error-hover-text" ng-message="panAuthenticationError">
+            <span class="error-icon">?</span>
+            <small class="error-msg-style">Pan Card not Authenticated</small>
+        </div>
+
+		<div class="error-hover-text" ng-message="ageParameterError">
+            <span class="error-icon">?</span>
+            <small class="error-msg-style">Enter valid age</small>
+        </div>
+	
+		<div class="error-hover-text" ng-message="aadharAuthenticationError">
+            <span class="error-icon">?</span>
+            <small class="error-msg-style">Aadhar Card not Authenticated</small>
+        </div>
+   		
+        <div ng-message="dateGreaterThan">Future dates only</div>
+        <div ng-message="dateLessThan">Past dates only</div>
+        <div ng-message="max">more than specified range</div>
+        <div ng-message="min">less than specified range</div>
+        
+        <div ng-message="password-characters">
+        Your password must consist of alphabetical or numeric characters.
+        It must also contain at least one special character, a number as well as an uppercase letter.
+        </div>
+	</script>
+</head>
+<body>
+	<div data-ui-view></div>
+	<div class="wrapper">
+		<div class="sidebar" data-color="purple"
+			data-image="../assets/img/sidebar-1.jpg" data-ui-view="sidebar"></div>
+		<div class="main-panel">
+			<nav class="navbar navbar-transparent navbar-absolute"
+				data-ui-view="header"></nav>
+			<div class="content" data-ui-view>
+				<div class="container-fluids">
+					<h2>
+						<b>Welcome to Loan Application Management System</b>
+					</h2>
+				</div>
+			</div>
+			<footer class="footer" data-ui-view="footer"> </footer>
+		</div>
+	</div>
+</body>
+</html>

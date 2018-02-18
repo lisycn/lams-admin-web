@@ -1,0 +1,52 @@
+<div class="wrapper">
+	<div class="main-panel">
+		<div class="content">
+			<div class="container-fluid">
+				<div class="col-md-3"></div>
+				<div class="col-md-4">
+					<div class="card">
+						<div class="card-header" data-background-color="purple">
+							<h2 class="title">Admin Login</h2>
+							<p class="category">Complete Authentication Process</p>
+						</div>
+						<div class="card-content">
+							<form name="loginForm" novalidate>
+								<div class="row">
+									<div class="col-md-12">
+										<div class="form-group label-floating">
+											<label class="control-label">Email Address</label> <input
+												type="email" class="form-control"
+												data-ng-model="login.email" name="userOrEmail" required>
+											<span
+												data-ng-if="loginForm.userOrEmail.$invalid && (loginForm.userOrEmail.$touched || loginForm.$submitted)"
+												class="error-msg-style">Enter Valid Email</span>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-12">
+										<div class="form-group label-floating">
+											<label class="control-label">Password</label> <input
+												type="password" class="form-control"
+												data-ng-model="login.password" name="password" required> <span
+												data-ng-if="loginForm.password.$invalid && (loginForm.password.$touched || loginForm.$submitted)"
+												class="error-msg-style">Enter password</span>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-8"></div>
+									<div class="col-md-4">
+										<button type="submit" class="btn btn-primary pull-right"
+											data-ng-click="doLogin()">Login</button>
+									</div>
+								</div>
+								<div class="clearfix"></div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
