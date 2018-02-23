@@ -1,5 +1,5 @@
-app.controller("usersCtrl",["$scope", "$http","$rootScope","Constant","userService",
-		function($scope, $rootScope,Constant,userService) {
+app.controller("usersCtrl",["$scope", "$http","$rootScope","Constant","userService","Notification",
+		function($scope, $http,$rootScope,Constant,userService,Notification) {
 	
 	$scope.users = [];
 	$scope.getUsers = function(userType){
@@ -12,17 +12,16 @@ app.controller("usersCtrl",["$scope", "$http","$rootScope","Constant","userServi
 	                }else if(success.data.status == 400){
 	                	Notification.error(success.data.message);
 	                }else{
-	                	Notification.success(Constant.ErrorMessage.SOMETHING_WENT_WRONG);
+	                	Notification.error(Constant.ErrorMessage.SOMETHING_WENT_WRONG);
 	                }
 	            }, function(error) {
 	                if(error.status == 401){
-	                    $rootScope.logout();
+	                    $rootScope.doLogout();
 	                }
 	                else{
-	                	Notification.success(Constant.ErrorMessage.SOMETHING_WENT_WRONG);
+	                	Notification.error(Constant.ErrorMessage.SOMETHING_WENT_WRONG);
 	                }
 	     });		
 	}
-	console.log("called");
-	$scope.getUsers();
+	$scope.getUsers(Constant.UserType.ALL.id);
 }]);

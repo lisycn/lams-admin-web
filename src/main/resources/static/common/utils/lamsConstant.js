@@ -7,6 +7,10 @@ app.constant('Constant', {
 		BORROWER : {
 			id : 2,
 			value : 'Borrower'
+		},
+		ALL : {
+			id : -1,
+			value : 'All'
 		}
 	},
 	ErrorMessage : {

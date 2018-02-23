@@ -41,7 +41,7 @@ app.config(["$stateProvider", "$urlRouterProvider" ,"$locationProvider","$sceDel
             }
         }
 	}).state("main", {
-    	url : '/main',
+    	url : '',
     	templateUrl : 'main.html',
 	}).state("main.lams.dashboard", {
         	url : '/dashboard',
