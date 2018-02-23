@@ -1,7 +1,7 @@
 /**
  * ROUTER CONFIGURATION
  */
-var app = angular.module("lamsAdmin",['ui.router','ngMessages','ngCookies']);
+var app = angular.module("lamsAdmin",['ui.router','ngMessages','toastr','ngCookies']);
 getUrls().then(bootstrapApplication);
 function getUrls() {
     var initInjector = angular.injector(["ng"]);
@@ -24,7 +24,7 @@ app.config(["$stateProvider", "$urlRouterProvider" ,"$locationProvider","$sceDel
 		url : '/login',
 		templateUrl : 'common/htmls/login.html',
 		controller: 'loginCtrl',
-		data : {pageTitle : "Lams | Admin Login"}
+		data : {pageTitle : "Lams Admin | Login"}
 	})
 	.state("lams", {
 		url : '/lams',
@@ -42,20 +42,28 @@ app.config(["$stateProvider", "$urlRouterProvider" ,"$locationProvider","$sceDel
         }
 	}).state("lams.dashboard", {
         	url : '/dashboard',
-    		templateUrl : 'dashboard/dashboard.html',
-    		controller: 'dashboardCtrl',
-    		data : {pageTitle : "Lams | Admin Dashboard"}
+        	views :  {
+        		'content' :  {
+        			templateUrl : 'dashboard/dashboard.html',
+            		controller: 'dashboardCtrl',
+            		data : {pageTitle : "Lams Admin | Dashboard"}        			
+        		}
+        	}
 	}).state("lams.users", {
     	url : '/users',
-		templateUrl : 'users/user-mgnt.html',
-		controller: 'userMgntCtrl',
-		data : {pageTitle : "Lams | Admin Dashboard"}
-	});
+    	views :  {
+    		'content' :  {
+    			templateUrl : 'usermanagement/users.html',
+        		controller: 'usersCtrl',
+        		data : {pageTitle : "Lams Admin | User Management"}        			
+    		}
+    	}
+});
 	$urlRouterProvider.otherwise("login");
 }]);
 
-app.run([ '$rootScope', '$state', '$stateParams','$http','$timeout',"$interval","$cookieStore","$q",
-	function($rootScope, $state, $stateParams,$http,$timeout,$interval,$cookieStore,$q) {
+app.run([ '$rootScope', '$state', '$stateParams','$http','$timeout',"$interval","$q","userService","Constant","$cookieStore",
+	function($rootScope, $state, $stateParams,$http,$timeout,$interval,$q,userService,Constant,$cookieStore) {
     $rootScope.state = $state;
     $rootScope.stateParams = $stateParams;
     $rootScope.isEmpty = function(data) {
@@ -63,6 +71,21 @@ app.run([ '$rootScope', '$state', '$stateParams','$http','$timeout',"$interval",
 				|| data == "null" || data == "undefined"
 				|| data == '' || data == [] || data == {});
 	}
+    
+    $rootScope.doLogout = function(){
+		userService.logout().then(
+	            function(success) {
+	            	$cookieStore.remove(Constant.TOKEN);
+	            	$state.go("login");
+	            }, function(error) {
+	            	$cookieStore.remove(Constant.TOKEN);
+	            	$state.go("login");
+	     });		
+		
+	}
+    if($rootScope.isEmpty($cookieStore.get(Constant.TOKEN))){
+    	$rootScope.doLogout();
+    }
 //    $state.go("login");
 
 }]);

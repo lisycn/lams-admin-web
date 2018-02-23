@@ -36,13 +36,16 @@
 <script src="../assets/js/angular/angular-messages.js"></script>
 <script src="lamsAdminApp.js"></script>
 <script src="common/controllers/loginCtrl.js"></script>
-<script src="common/controllers/signupCtrl.js"></script>
 <script src="common/utils/lamsConstant.js"></script>
-<script src="common/services/httpService.js"></script>
 <script src="common/services/userService.js"></script>
+<script src="common/services/httpService.js"></script>
+<script src="common/services/commonServices.js"></script>
 <script src="common/directives/commonDirectives.js"></script>
 <script src="dashboard/dashboardCtrl.js"></script>
-<script src="user/dashboardCtrl.js"></script>
+<script src="usermanagement/usersCtrl.js"></script>
+
+<script src="../assets/js/angular/angular-toastr.tpls.js"></script>
+<link rel="stylesheet" href="../assets/css/angular-toastr.css" />
 
 
 <script type="text/ng-template" id="error-messages">
@@ -137,12 +140,7 @@
 		<div class="main-panel">
 			<nav class="navbar navbar-transparent navbar-absolute"
 				data-ui-view="header"></nav>
-			<div class="content" data-ui-view>
-				<div class="container-fluids">
-					<h2>
-						<b>Welcome to Loan Application Management System</b>
-					</h2>
-				</div>
+			<div class="content" data-ui-view="content">
 			</div>
 			<footer class="footer" data-ui-view="footer"> </footer>
 		</div>
