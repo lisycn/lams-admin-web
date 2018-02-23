@@ -26,36 +26,36 @@ app.config(["$stateProvider", "$urlRouterProvider" ,"$locationProvider","$sceDel
 		controller: 'loginCtrl',
 		data : {pageTitle : "Lams Admin | Login"}
 	})
-	.state("main.lams", {
+	.state("admin.lams", {
 		url : '/lams',
 		abstract: true,
         views: {
-            'header@main': {
+            'header@admin': {
                 templateUrl: 'common/htmls/header.html',
             },
-            'footer@main': {
+            'footer@admin': {
                 templateUrl: 'common/htmls/footer.html',
             },
-            'sidebar@main': {
+            'sidebar@admin': {
                 templateUrl: 'common/htmls/sidebar.html',
             }
         }
-	}).state("main", {
-    	url : '',
-    	templateUrl : 'main.html',
-	}).state("main.lams.dashboard", {
+	}).state("admin", {
+    	url : '/admin',
+    	templateUrl : 'admin.html',
+	}).state("admin.lams.dashboard", {
         	url : '/dashboard',
         	views :  {
-        		'content@main' :  {
+        		'content@admin' :  {
         			templateUrl : 'dashboard/dashboard.html',
             		controller: 'dashboardCtrl',
             		data : {pageTitle : "Lams Admin | Dashboard"}        			
         		}
         	}
-	}).state("main.lams.users", {
+	}).state("admin.lams.users", {
     	url : '/users',
     	views :  {
-    		'content@main' :  {
+    		'content@admin' :  {
     			templateUrl : 'usermanagement/users.html',
         		controller: 'usersCtrl',
         		data : {pageTitle : "Lams Admin | User Management"}        			
