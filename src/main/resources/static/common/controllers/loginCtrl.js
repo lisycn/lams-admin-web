@@ -12,7 +12,7 @@ app.controller("loginCtrl",["$scope", "$http","$rootScope","userService","Consta
 	            function(success) {
 	            	if(success.data.status == 200){
 	            		$cookieStore.put(Constant.TOKEN,success.data.token);
-	            		$state.go("lams.dashboard");
+	            		$state.go("main.lams.dashboard");
 	                }else{
 	                	Notification.error(success.data.message);
 	                }
