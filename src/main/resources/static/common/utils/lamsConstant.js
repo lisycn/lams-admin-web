@@ -1,4 +1,5 @@
 app.constant('Constant', {
+	NA : "NA",
 	UserType : {
 		LENDER : {
 			id : 1,

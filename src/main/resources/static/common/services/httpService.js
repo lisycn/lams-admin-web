@@ -1,4 +1,4 @@
-app.service("httpService", ['$http','$sce','$cookieStore','Constant','$rootScope', function ($http,$sce,$cookieStore,Constant,$rootScope) {
+app.service("httpService", ["$http","$sce","$cookieStore","Constant","$rootScope", function ($http,$sce,$cookieStore,Constant,$rootScope) {
 		this.post = function (url, data,ignoreLoader) {
         	if(ignoreLoader == undefined || ignoreLoader == null || ignoreLoader == ""){
         		ignoreLoader = false;
@@ -20,7 +20,7 @@ app.service("httpService", ['$http','$sce','$cookieStore','Constant','$rootScope
         				}
         	};
         	if(responseType == true){
-        		data.responseType = 'arraybuffer';
+        		data.responseType = "arraybuffer";
         		return $http(data);        		
         	}else{
         		return $http(data);        		

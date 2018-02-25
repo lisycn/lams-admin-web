@@ -15,3 +15,13 @@ app.directive('title', ['$rootScope', '$timeout',
 	    };
 	  }
 ]);
+
+app.directive('isActive', function () {
+    return {
+        restrict: 'E',
+        scope: {
+            status: '@' 
+        },
+        template: '<span class="label label-default" ng-class="{true: \'label-info\' , false:\'label-danger\' }[status]"> {{ status | isActive }}</span>'
+    }
+})

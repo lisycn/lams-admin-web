@@ -1,7 +1,7 @@
 /**
  * ROUTER CONFIGURATION
  */
-var app = angular.module("lamsAdmin",['ui.router','ngMessages','toastr','ngCookies']);
+var app = angular.module("lamsAdmin",["ui.router","ngCookies","ngMessages","toastr","ui.bootstrap"]);
 getUrls().then(bootstrapApplication);
 function getUrls() {
     var initInjector = angular.injector(["ng"]);
@@ -65,10 +65,11 @@ app.config(["$stateProvider", "$urlRouterProvider" ,"$locationProvider","$sceDel
 	$urlRouterProvider.otherwise("login");
 }]);
 
-app.run([ '$rootScope', '$state', '$stateParams','$http','$timeout',"$interval","$q","userService","Constant","$cookieStore","Notification",
+app.run([ "$rootScope", "$state", "$stateParams","$http","$timeout","$interval","$q","userService","Constant","$cookieStore","Notification",
 	function($rootScope, $state, $stateParams,$http,$timeout,$interval,$q,userService,Constant,$cookieStore,Notification) {
     $rootScope.state = $state;
     $rootScope.stateParams = $stateParams;
+    $rootScope.Constant = Constant;
     $rootScope.isEmpty = function(data) {
 		return (data == null || data == undefined || data == ""
 				|| data == "null" || data == "undefined"
@@ -76,6 +77,10 @@ app.run([ '$rootScope', '$state', '$stateParams','$http','$timeout',"$interval",
 	}
     
     $rootScope.doLogout = function(){
+    	if($rootScope.isEmpty($cookieStore.get(Constant.TOKEN))){
+    		$state.go("login");
+        	return;
+        }
 		userService.logout().then(
 	            function(success) {
 	            	$cookieStore.remove(Constant.TOKEN);
