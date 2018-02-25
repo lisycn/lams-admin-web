@@ -1,0 +1,33 @@
+<div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header" data-background-color="purple">
+                                    <h4 class="title">User</h4>
+                                    <p class="category">You can see all the Registered users here.</p>
+                                </div>
+                                <div class="card-content table-responsive">
+                                    <table class="table">
+                                        <thead class="text-primary">
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                            <th>Mobile</th>
+                                            <th>Active</th>
+                                        </thead>
+                                        <tbody>
+                                        <tr data-ng-repeat="user in users">
+                                        	<td>{{user.name || Constant.NA}}</td>
+                                        	<td>{{user.email || Constant.NA}}</td>
+                                        	<td>{{user.mobile || Constant.NA}}</td>
+                                        	<td>{{user.isActive ? 'Yes': 'No'}}</td>
+                                        </tr>
+                                            <tr data-ng-if="isEmpty(users)">
+                                            <td colspan="4" class="alert alert-default text-center"> No Users are registered Yet!</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
