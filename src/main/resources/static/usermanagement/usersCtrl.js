@@ -15,12 +15,8 @@ app.controller("usersCtrl",["$scope", "$http","$rootScope","Constant","userServi
 	                	Notification.error(Constant.ErrorMessage.SOMETHING_WENT_WRONG);
 	                }
 	            }, function(error) {
-	                if(error.status == 401){
-	                    $rootScope.doLogout();
-	                }
-	                else{
-	                	Notification.error(Constant.ErrorMessage.SOMETHING_WENT_WRONG);
-	                }
+	            	console.log("error==>>",error);
+	            	$rootScope.validateErrorResponse(error);
 	     });		
 	}
 	$scope.getUsers(Constant.UserType.ALL.id);
