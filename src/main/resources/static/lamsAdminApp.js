@@ -57,10 +57,10 @@ app.config(["$stateProvider", "$urlRouterProvider" ,"$locationProvider","$sceDel
     	views :  {
     		'content@admin' :  {
     			templateUrl : 'usermanagement/users.html',
-        		controller: 'usersCtrl',
-        		data : {pageTitle : "Lams Admin | User Management"}        			
+        		controller: 'usersCtrl'
     		}
-    	}
+    	},
+    	data : {pageTitle : "Lams Admin | User Management"}
 });
 	$urlRouterProvider.otherwise("login");
 }]);

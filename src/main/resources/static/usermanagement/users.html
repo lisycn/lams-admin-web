@@ -25,35 +25,39 @@
 										</p>
 									</div> -->
 									<div class="card-content">
-										<form name="forms.lenderForm" data-ng-submit="updateLenderDetails()"
-											novalidate>
+										<form name="forms.lenderForm"
+											data-ng-submit="updateLenderDetails()" novalidate>
 											<div class="row">
 												<div class="col-md-3">
 													<div class="form-group">
-														<label class="control-label">Email address</label> <input
-															type="email" name="email" class="form-control"
+														<label class="control-label">Email address <span
+															class="text-danger">*</span></label> <input type="email"
+															name="email" class="form-control"
 															data-ng-model="userData.email" required>
 													</div>
 												</div>
 												<div class="col-md-3">
 													<div class="form-group">
-														<label class="control-label">Mobile</label> <input
-															type="text" name="mobile" class="form-control"
+														<label class="control-label">Mobile <span
+															class="text-danger">*</span></label> <input type="text"
+															name="mobile" class="form-control"
 															data-ng-model="userData.mobile" required>
 													</div>
 												</div>
 
 												<div class="col-md-3">
 													<div class="form-group">
-													<label class="control-label">Password</label> <input
-															type="password" name="password" class="form-control"
+														<label class="control-label">Password <span
+															class="text-danger">*</span></label> <input type="password"
+															name="password" class="form-control"
 															data-ng-model="userData.password" required>
 													</div>
 												</div>
 												<div class="col-md-3">
 													<div class="form-group">
-													<label class="control-label">Confirm Password</label> <input
-															type="password" name="confirmPassword" class="form-control"
+														<label class="control-label">Confirm Password <span
+															class="text-danger">*</span></label> <input type="password"
+															name="confirmPassword" class="form-control"
 															data-ng-model="userData.confirmPassword" required>
 													</div>
 												</div>
@@ -61,16 +65,18 @@
 											<div class="row">
 												<div class="col-md-3">
 													<div class="form-group">
-														<label class="control-label">Salutation</label> <input
-															type="text" name="salutation" class="form-control"
+														<label class="control-label">Salutation <span
+															class="text-danger">*</span></label> <input type="text"
+															name="salutation" class="form-control"
 															data-ng-model="userData.salutation" required>
 													</div>
 												</div>
 
 												<div class="col-md-3">
 													<div class="form-group">
-														<label class="control-label">First Name</label> <input
-															type="text" name="firstName" class="form-control"
+														<label class="control-label">First Name <span
+															class="text-danger">*</span></label> <input type="text"
+															name="firstName" class="form-control"
 															data-ng-model="userData.firstName" required>
 													</div>
 												</div>
@@ -79,14 +85,15 @@
 													<div class="form-group">
 														<label class="control-label">Middle Name</label> <input
 															type="text" name="middleName" class="form-control"
-															data-ng-model="userData.middleName" required>
+															data-ng-model="userData.middleName">
 													</div>
 												</div>
 
 												<div class="col-md-3">
 													<div class="form-group">
-														<label class="control-label">Last Name</label> <input
-															type="text" name="lastName" class="form-control"
+														<label class="control-label">Last Name <span
+															class="text-danger">*</span></label> <input type="text"
+															name="lastName" class="form-control"
 															data-ng-model="userData.lastName" required>
 													</div>
 												</div>
@@ -94,7 +101,7 @@
 											<div class="row">
 												<div class="col-md-8"></div>
 												<div class="col-md-4 ">
-													<button type="submit"  class="btn btn-primary pull-right">Submit</button>
+													<button type="submit" class="btn btn-primary pull-right">Submit</button>
 												</div>
 											</div>
 										</form>
@@ -104,46 +111,59 @@
 						</div>
 					</div>
 
-					<div class="card-content table-responsive">
-						<table class="table">
-							<thead class="text-primary">
-								<th>Sr No.</th>
-								<th>Lender Name</th>
-								<th>Email</th>
-								<th>Mobile</th>
-								<th>FirstName</th>
-								<th>LastName</th>
-								<th>Active</th>
-								<th>Edit</th>
-							</thead>
-							<tbody>
-								<tr data-ng-repeat="user in users">
-									<td>{{$index + 1}}</td>
-									<td>{{user.name || Constant.NA}}</td>
-									<td>{{user.email || Constant.NA}}</td>
-									<td>{{user.mobile || Constant.NA}}</td>
-									<td>{{user.firstName || Constant.NA}}</td>
-									<td>{{user.lastName || Constant.NA}}</td>
-									<td> <is-active status="{{user.isActive}}"></is-active> </td>
-									<td><button type="button" class="btn btn-primary btn-sm" ng-click="editUserData(user)">Edit</button></td>
-								</tr>
-								<tr data-ng-if="isEmpty(users)">
-									<td colspan="4" class="alert alert-default text-center">No
-										Users are registered Yet!</td>
-								</tr>
-							</tbody>
-						</table>
+					<div class="panel panel-default">
+						<div class="panel-body">Lenders</div>
+						<div class="card-content table-responsive">
+							<table class="table">
+								<thead class="text-primary">
+									<tr>
+										<th>Sr No.</th>
+										<th>Lender Name</th>
+										<th>Email</th>
+										<th>Mobile</th>
+										<th>FirstName</th>
+										<th>LastName</th>
+										<th>No Of Invitations Sent</th>
+										<th>Active</th>
+										<th>Action</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr data-ng-repeat="user in users">
+										<td>{{$index + 1}}</td>
+										<td>{{user.name || Constant.NA}}</td>
+										<td>{{user.email || Constant.NA}}</td>
+										<td>{{user.mobile || Constant.NA}}</td>
+										<td>{{user.firstName || Constant.NA}}</td>
+										<td>{{user.lastName || Constant.NA}}</td>
+										<td>{{user.invitationCount || Constant.NA}}</td>
+										<td><is-active status="{{user.isActive}}"></is-active></td>
+										<td><button type="button" class="btn btn-primary btn-sm"
+												ng-click="editUserData(user)">Edit</button>
+											<button type="button" class="btn btn-primary btn-sm"
+												ng-click="sendLinkOnMail(user)">Invite</button></td>
+									</tr>
+									<tr data-ng-if="isEmpty(users)">
+										<td colspan="9" class="alert alert-default text-center">No
+											Users are registered Yet!</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
 					</div>
+
 					</uib-tab> <uib-tab index="1" heading="Borrower"
 						ng-click="getUsers(Constant.UserType.BORROWER.id)">
 					<div class="card-content table-responsive">
 						<table class="table">
 							<thead class="text-primary">
-								<th>Sr No.</th>
-								<th>Lender Name</th>
-								<th>Email</th>
-								<th>Mobile</th>
-								<th>Active</th>
+								<tr>
+									<th>Sr No.</th>
+									<th>Lender Name</th>
+									<th>Email</th>
+									<th>Mobile</th>
+									<th>Active</th>
+								</tr>
 							</thead>
 							<tbody>
 								<tr data-ng-repeat="user in users">
@@ -154,7 +174,7 @@
 									<td>{{user.isActive ? 'Yes': 'No'}}</td>
 								</tr>
 								<tr data-ng-if="isEmpty(users)">
-									<td colspan="4" class="alert alert-default text-center">No
+									<td colspan="5" class="alert alert-default text-center">No
 										Users are registered Yet!</td>
 								</tr>
 							</tbody>
