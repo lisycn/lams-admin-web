@@ -46,3 +46,31 @@ app.factory('Notification', ["toastr", function (toastr) {
         
         return notification;
     }]);
+
+
+app.service("masterService", [ 'httpService','URLS',"$http",
+	function(httpService, URLS, $http) {
+
+		this.pingRequest = function() {
+			return httpService.get(URLS.user + "/ping");
+		};
+
+		this.countries = function(mode) {
+			return httpService.get(URLS.user + '/master/get_country/'  + mode);
+		};
+		
+		this.salutations = function(mode) {
+			return httpService.get(URLS.user + '/master/get_salutation/'  + mode);
+		};
+		
+		this.states = function(countryId) {
+			return httpService.get(URLS.user + '/master/get_state_by_country_id/' + countryId);
+		};
+		
+		this.cities = function(stateId) {
+			return httpService.get(URLS.user + '/master/get_city_by_state_id/' + stateId);
+		};
+		
+		
+		
+	} ]);

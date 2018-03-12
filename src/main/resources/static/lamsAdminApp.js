@@ -65,8 +65,8 @@ app.config(["$stateProvider", "$urlRouterProvider" ,"$locationProvider","$sceDel
 	$urlRouterProvider.otherwise("login");
 }]);
 
-app.run([ "$rootScope", "$state", "$stateParams","$http","$timeout","$interval","$q","userService","Constant","$cookieStore","Notification",
-	function($rootScope, $state, $stateParams,$http,$timeout,$interval,$q,userService,Constant,$cookieStore,Notification) {
+app.run([ "$rootScope", "$state", "$stateParams","$http","$timeout","$interval","$q","userService","Constant","$cookieStore","Notification","masterService",
+	function($rootScope, $state, $stateParams,$http,$timeout,$interval,$q,userService,Constant,$cookieStore,Notification,masterService) {
     $rootScope.state = $state;
     $rootScope.stateParams = $stateParams;
     $rootScope.Constant = Constant;
@@ -114,6 +114,75 @@ app.run([ "$rootScope", "$state", "$stateParams","$http","$timeout","$interval",
         	Notification.error(Constant.ErrorMessage.SOMETHING_WENT_WRONG);
         }
     }
+    
+    
+    $rootScope.getUserByType = function(userType){
+		switch(userType){
+		case  Constant.UserType.LENDER.id:
+			return Constant.UserType.LENDER;
+		case Constant.UserType.BORROWER.id:
+			return Constant.UserType.BORROWER;
+		case Constant.UserType.ALL.id:
+			return Constant.UserType.ALL;
+		default : 
+			return null;
+		}
+	}
+    
+    $rootScope.user = {};
+	$rootScope.getLoggedInUserDetail = function(){
+		userService.getLoggedInUserDetail().then(
+	            function(success) {
+	            	if(success.data.status == 200){
+	            		$rootScope.user = success.data.data;
+	                }else{
+	                	Notification.error(success.data.message);
+	                }
+	            }, function(error) {
+	            	$rootScope.validateErrorResponse(error);
+	     });		
+	}
+    
+    $rootScope.countries = [];
+	$rootScope.getCountries = function(mode){
+		masterService.countries(mode).then(
+	            function(success) {
+	            	if(success.data.status == 200){
+	            		$rootScope.countries = success.data.data;	            		
+	            	}else{
+	            		Notification.warning(success.data.message);
+	            	}
+	            }, function(error) {
+	            	$rootScope.validateErrorResponse(error);
+	     });		
+	}
+	
+    $rootScope.salutations = [];
+	$rootScope.getSalutations = function(mode){
+		masterService.salutations(mode).then(
+	            function(success) {
+	            	if(success.data.status == 200){
+	            		$rootScope.salutations = success.data.data;	            		
+	            	}else{
+	            		Notification.warning(success.data.message);
+	            	}
+	            }, function(error) {
+	            	$rootScope.validateErrorResponse(error);
+	     });		
+	}
+	
+	$rootScope.loadMasters = function(){
+		$rootScope.getCountries(Constant.Mode.ACTIVE.id);
+		$rootScope.getLoggedInUserDetail();
+		$rootScope.getSalutations(Constant.Mode.ACTIVE.id);
+}
+	
+	//Getting All Masters
+		if(!$rootScope.isEmpty($cookieStore.get(Constant.TOKEN))){
+			$rootScope.loadMasters();	
+		}
+		
+		$rootScope.genders =[{id : 1, value : 'Male'},{id : 2, value : 'Female'},{id : 3, value : 'Third Gender'}];
 
 }]);
 

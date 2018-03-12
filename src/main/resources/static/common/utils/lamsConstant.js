@@ -14,6 +14,18 @@ app.constant('Constant', {
 			value : 'All'
 		}
 	},
+	Mode : {
+		ACTIVE :{
+			id : 0,
+			value : "Active"
+		},INACTIVE :{
+			id : 1,
+			value : "INActive"
+		},BOTH :{
+			id : 2,
+			value : "Both"
+		}
+	},
 	ErrorMessage : {
 		SOMETHING_WENT_WRONG : "Something Went Wrong !",
 		UN_AUTHORIZED : "Unauthorized ! Please Login Again.",

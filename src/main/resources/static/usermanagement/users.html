@@ -66,9 +66,11 @@
 												<div class="col-md-3">
 													<div class="form-group">
 														<label class="control-label">Salutation <span
-															class="text-danger">*</span></label> <input type="text"
-															name="salutation" class="form-control"
-															data-ng-model="userData.salutation" required>
+															class="text-danger">*</span></label> <select class="form-control"
+															data-ng-model="userData.salutation"
+															data-ng-options="salu.id as salu.name for salu in salutations">
+															<option value="">Select Salutation</option>
+														</select>
 													</div>
 												</div>
 
@@ -131,17 +133,17 @@
 								<tbody>
 									<tr data-ng-repeat="user in users">
 										<td>{{$index + 1}}</td>
-										<td>{{user.name || Constant.NA}}</td>
+										<td>{{ (!isEmpty(user.firstName) && !isEmpty(user.lastName) ? user.firstName + ' ' +  user.lastName :  user.firstName   || Constant.NA )}}</td>
 										<td>{{user.email || Constant.NA}}</td>
 										<td>{{user.mobile || Constant.NA}}</td>
 										<td>{{user.firstName || Constant.NA}}</td>
 										<td>{{user.lastName || Constant.NA}}</td>
-										<td>{{user.invitationCount || Constant.NA}}</td>
+										<td>{{user.invitationCount || 0}}</td>
 										<td><is-active status="{{user.isActive}}"></is-active></td>
 										<td><button type="button" class="btn btn-primary btn-sm"
 												ng-click="editUserData(user)">Edit</button>
 											<button type="button" class="btn btn-primary btn-sm"
-												ng-click="sendLinkOnMail(user)">Invite</button></td>
+												ng-click="inviteLender(user)">Invite</button></td>
 									</tr>
 									<tr data-ng-if="isEmpty(users)">
 										<td colspan="9" class="alert alert-default text-center">No
@@ -159,7 +161,7 @@
 							<thead class="text-primary">
 								<tr>
 									<th>Sr No.</th>
-									<th>Lender Name</th>
+									<th>Borrower Name</th>
 									<th>Email</th>
 									<th>Mobile</th>
 									<th>Active</th>
@@ -168,10 +170,10 @@
 							<tbody>
 								<tr data-ng-repeat="user in users">
 									<td>{{$index + 1}}</td>
-									<td>{{user.name || Constant.NA}}</td>
+									<td>{{ (!isEmpty(user.firstName) && !isEmpty(user.lastName) ? user.firstName + ' ' +  user.lastName :  user.firstName   || Constant.NA )}}</td>
 									<td>{{user.email || Constant.NA}}</td>
 									<td>{{user.mobile || Constant.NA}}</td>
-									<td>{{user.isActive ? 'Yes': 'No'}}</td>
+									<td><is-active status="{{user.isActive}}"></is-active></td>
 								</tr>
 								<tr data-ng-if="isEmpty(users)">
 									<td colspan="5" class="alert alert-default text-center">No

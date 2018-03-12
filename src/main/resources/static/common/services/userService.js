@@ -9,8 +9,16 @@ app.service("userService", [ "httpService", "URLS", "$rootScope","$http",
 				return httpService.post(URLS.user + "/registration", data);
 			};
 			
+			this.inviteLender = function(data) {
+				return httpService.post(URLS.user + "/invite_lender", data);
+			};
+			
 			this.updateLenderDetails = function(data) {
 				return httpService.post(URLS.user + "/update_lender_details", data);
+			};
+			
+			this.getLoggedInUserDetail = function() {
+				return httpService.get(URLS.user + '/get_user_details');
 			};
 
 			this.login = function(data) {
