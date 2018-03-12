@@ -60,12 +60,13 @@ app.controller("usersCtrl", [ "$scope", "$http", "$rootScope", "Constant", "user
 
 
 		//Sending Invitaiton to Lender
-		$scope.inviteLender = function(lenderObj) {
+		$scope.inviteLender = function(lenderObj,$index) {
 			userService.inviteLender(lenderObj).then(
 				function(success) {
 					if (success.data.status == 200) {
 						Notification.success(success.data.message);
 						lenderObj = success.data.data;
+						$scope.users[$index] = lenderObj; 
 					} else if (success.data.status == 400) {
 						Notification.warning(success.data.message);
 					} else {
