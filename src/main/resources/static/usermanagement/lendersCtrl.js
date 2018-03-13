@@ -1,8 +1,8 @@
-app.controller("usersCtrl", [ "$scope", "$http", "$rootScope", "Constant", "userService", "Notification",
+app.controller("lendersCtrl", [ "$scope", "$http", "$rootScope", "Constant", "userService", "Notification",
 	function($scope, $http, $rootScope, Constant, userService, Notification) {
 
 		$scope.forms = {};
-		$scope.userData = {};
+		$scope.userData = {bank : {},applications: [{}] };
 		$scope.users = [];
 		$scope.getUsers = function(userType) {
 			//userType is NUll then will fetch all the users
@@ -41,11 +41,12 @@ app.controller("usersCtrl", [ "$scope", "$http", "$rootScope", "Constant", "user
 			$scope.userData.password = $scope.userData.password.trim();
 			$scope.userData.tempPassword = $scope.userData.password;
 			$scope.userData.userType = Constant.UserType.LENDER.id;
+			console.log("$scope.userData===>",$scope.userData);
 			userService.updateLenderDetails($scope.userData).then(
 				function(success) {
 					if (success.data.status == 200) {
 						Notification.success(success.data.message);
-						$scope.userData = {};
+						$scope.userData = {bank : {},applications: [{}] };
 						$scope.getUsers(Constant.UserType.LENDER.id);
 					} else if (success.data.status == 400) {
 						Notification.warning(success.data.message);
@@ -59,7 +60,7 @@ app.controller("usersCtrl", [ "$scope", "$http", "$rootScope", "Constant", "user
 		}
 
 
-		//Sending Invitaiton to Lender
+		//Sending Invitation to Lender
 		$scope.inviteLender = function(lenderObj,$index) {
 			userService.inviteLender(lenderObj).then(
 				function(success) {
