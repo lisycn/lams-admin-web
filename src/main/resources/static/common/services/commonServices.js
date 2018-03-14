@@ -79,6 +79,4 @@ app.service("masterService", [ 'httpService','URLS',"$http",
 			return httpService.get(URLS.user + '/master/get_application_type/' + mode);
 		};
 		
-		
-		
 	} ]);

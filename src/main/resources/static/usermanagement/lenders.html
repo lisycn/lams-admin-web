@@ -5,37 +5,49 @@
 			<div class="card">
 				<div class="card-header" data-background-color="purple">
 					<h4 class="title">Lender</h4>
-					<p class="category">List of Lenders are registered in the System</p>
+					<p class="category">List of Lenders are registered in the
+						System</p>
 				</div>
 				<br />
 				<div class="col-md-12">
 					<div class="panel panel-default">
-						<div class="panel-body">Lenders</div>
+						<div class="panel-body">
+							<span>Lenders  <span class="badge">{{users.length}}</span></span>
+						</div>
+
 						<div class="card-content table-responsive">
 							<table class="table">
 								<thead class="text-primary">
+									<tr>
+										<th colspan="10"><input type="text" name="searchData"
+											class="form-control" data-ng-model="searchLender"
+											placeholder="Type anything to search llender"></th>
+									</tr>
 									<tr>
 										<th>Sr No.</th>
 										<th>Lender Name</th>
 										<th>Email</th>
 										<th>Mobile</th>
-										<th>FirstName</th>
-										<th>LastName</th>
+										<th>Name</th>
+										<th>Bank/NBFC</th>
+										<th>Product</th>
 										<th>No Of Invitations Sent</th>
 										<th>Active</th>
 										<th>Action</th>
 									</tr>
 								</thead>
 								<tbody>
-									<tr data-ng-repeat="user in users">
+									<tr data-ng-repeat="user in users | filter : searchLender"
+										class="{{userData.id == user.id ? 'bg-info' : ''}}">
 										<td>{{$index + 1}}</td>
 										<td>{{ (!isEmpty(user.firstName) &&
 											!isEmpty(user.lastName) ? user.firstName + ' ' +
 											user.lastName : user.firstName || Constant.NA )}}</td>
 										<td>{{user.email || Constant.NA}}</td>
 										<td>{{user.mobile || Constant.NA}}</td>
-										<td>{{user.firstName || Constant.NA}}</td>
-										<td>{{user.lastName || Constant.NA}}</td>
+										<td>{{user.firstName + ' ' + user.lastName || Constant.NA}}</td>
+										<td>{{user.bank.name || Constant.NA}}</td>
+										<td>{{user.applications[0].applicationTypeName || Constant.NA}}</td>
 										<td>{{user.invitationCount || 0}}</td>
 										<td><is-active status="{{user.isActive}}"></is-active></td>
 										<td><button type="button" class="btn btn-primary btn-sm"
@@ -149,8 +161,9 @@
 												<div class="form-group">
 													<label class="control-label">Application<span
 														class="text-danger">*</span></label> <select class="form-control"
-														data-ng-model="userData.applications[0].id"
-														data-ng-options="appType.id as appType.name for appType in applicationTypes">
+														data-ng-model="userData.applications[0].applicationTypeId"
+														data-ng-options="appType.id as appType.name for appType in applicationTypes"
+														required>
 														<option value="">Select Application</option>
 													</select>
 												</div>
@@ -164,6 +177,8 @@
 														type="checkbox" name="isActive"
 														data-ng-model="userData.isActive"></span>
 													<button type="submit" class="btn btn-primary">Submit</button>
+													<button type="submit" data-ng-if="userData.id"
+														data-ng-click="resetUser()" class="btn btn-default">Reset</button>
 												</div>
 											</div>
 										</div>

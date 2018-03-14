@@ -2,8 +2,10 @@ app.controller("lendersCtrl", [ "$scope", "$http", "$rootScope", "Constant", "us
 	function($scope, $http, $rootScope, Constant, userService, Notification) {
 
 		$scope.forms = {};
-		$scope.userData = {bank : {},applications: [{}] };
 		$scope.users = [];
+		$scope.resetUser = function(){
+			$scope.userData = {bank : {},applications: [{}] };
+		}
 		$scope.getUsers = function(userType) {
 			//userType is NUll then will fetch all the users
 			userService.getUserByType(userType).then(
@@ -23,9 +25,11 @@ app.controller("lendersCtrl", [ "$scope", "$http", "$rootScope", "Constant", "us
 		}
 		$scope.getUsers(Constant.UserType.LENDER.id);
 
-
 		$scope.editUserData = function(user) {
 			$scope.userData = angular.copy(user);
+			$scope.userData.password = $scope.userData.tempPassword;
+			$scope.userData.confirmPassword = $scope.userData.tempPassword;
+			console.log("$scope.userData===>",$scope.userData);
 		}
 
 		$scope.updateLenderDetails = function() {
@@ -46,7 +50,7 @@ app.controller("lendersCtrl", [ "$scope", "$http", "$rootScope", "Constant", "us
 				function(success) {
 					if (success.data.status == 200) {
 						Notification.success(success.data.message);
-						$scope.userData = {bank : {},applications: [{}] };
+						$scope.resetUser();
 						$scope.getUsers(Constant.UserType.LENDER.id);
 					} else if (success.data.status == 400) {
 						Notification.warning(success.data.message);

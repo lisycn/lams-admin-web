@@ -82,6 +82,34 @@ app.config([ "$stateProvider", "$urlRouterProvider", "$locationProvider", "$sceD
 		$urlRouterProvider.otherwise("login");
 	} ]);
 
+app.config(['$httpProvider', function ($httpProvider) {
+    $httpProvider.interceptors.push(function ($q, $rootScope) {
+        if ($rootScope.activeCalls == undefined) {
+            $rootScope.activeCalls = 0;
+        }
+        console.log("$rootScope.activeCalls====>",$rootScope.activeCalls);
+
+        return {
+            request: function (config) {
+                $rootScope.activeCalls += 1;
+                return config;
+            },
+            requestError: function (rejection) {
+                $rootScope.activeCalls -= 1;
+                return rejection;
+            },
+            response: function (response) {
+                $rootScope.activeCalls -= 1;
+                return response;
+            },
+            responseError: function (rejection) {
+                $rootScope.activeCalls -= 1;
+                return rejection;
+            }
+        };
+    });
+}]);
+
 	//app.config(['$stateProvider', '$httpProvider', '$locationProvider', '$urlRouterProvider', '$controllerProvider', '$compileProvider', '$filterProvider', '$provide', '$ocLazyLoadProvider',
 	//	function ($stateProvider, $httpProvider, $locationProvider, $urlRouterProvider, $controllerProvider, $compileProvider, $filterProvider, $provide, $ocLazyLoadProvider) {
 	//

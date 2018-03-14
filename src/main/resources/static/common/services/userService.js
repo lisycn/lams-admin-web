@@ -32,5 +32,4 @@ app.service("userService", [ "httpService", "URLS", "$rootScope","$http",
 			this.logout = function() {
 				return httpService.get(URLS.user + "/logout");
 			};
-			
 		} ]);
