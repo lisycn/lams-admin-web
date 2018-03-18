@@ -1,4 +1,4 @@
-app.controller("borrowersCtrl", [ "$scope", "$http", "$rootScope", "Constant", "userService", "Notification",
+angular.module("lamsAdmin").controller("borrowersCtrl", [ "$scope", "$http", "$rootScope", "Constant", "userService", "Notification",
 	function($scope, $http, $rootScope, Constant, userService, Notification) {
 
 		$scope.forms = {};

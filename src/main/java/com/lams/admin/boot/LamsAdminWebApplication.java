@@ -15,11 +15,11 @@ public class LamsAdminWebApplication {
 
 	@Autowired
 	ApplicationContext applicationContext;
-	
+
 	public static void main(String[] args) {
 		SpringApplication.run(LamsAdminWebApplication.class, args);
 	}
-	
+
 	@Bean
 	public ObjectMapper createObjectMapper() {
 		ObjectMapper objectMapper = new ObjectMapper();

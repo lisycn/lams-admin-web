@@ -1,7 +1,15 @@
 /**
  * ROUTER CONFIGURATION
  */
-var app = angular.module("lamsAdmin", [ "ui.router", "ngCookies", "ngMessages", "toastr", "ui.bootstrap" ]);
+var app = angular.module("lamsAdmin", [ "ui.router", 
+	"oc.lazyLoad",
+	"ngCookies",
+	"ngMessages",
+	"toastr",
+	"ui.bootstrap",
+	"angular-loading-bar"
+	]);
+
 getUrls().then(bootstrapApplication);
 function getUrls() {
 	var initInjector = angular.injector([ "ng" ]);
@@ -17,9 +25,22 @@ function bootstrapApplication() {
 		angular.bootstrap(document, [ "lamsAdmin" ]);
 	});
 }
+
+app.config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
+	cfpLoadingBarProvider.includeSpinner = true;
+    cfpLoadingBarProvider.latencyThreshold = 500;
+}]);
+
+//app.config(['$ocLazyLoadProvider', function($ocLazyLoadProvider) {
+//	$ocLazyLoadProvider.config({
+//		  debug: true
+//		});
+//}]);
+
 app.config([ "$stateProvider", "$urlRouterProvider", "$locationProvider", "$sceDelegateProvider",
-	function($stateProvider, $urlRouterProvider, $locationProvider, $sceDelegateProvider) {
-		$stateProvider
+	function($stateProvider, $urlRouterProvider, $locationProvider, $sceDelegateProvider, $controllerProvider) {
+
+	$stateProvider
 			.state("login", {
 				url : '/login',
 				templateUrl : 'common/htmls/login.html',
@@ -50,11 +71,17 @@ app.config([ "$stateProvider", "$urlRouterProvider", "$locationProvider", "$sceD
 			views : {
 				'content@admin' : {
 					templateUrl : 'dashboard/dashboard.html',
-					controller : 'dashboardCtrl',
-					data : {
-						pageTitle : "Lams Admin | Dashboard"
-					}
+					controller : 'dashboardCtrl'		
 				}
+			},
+			resolve: {
+                lazyLoad: ['$ocLazyLoad', function ($ocLazyLoad) {
+                    return $ocLazyLoad.load({files: [
+                            'dashboard/dashboardCtrl.js']});
+                }]
+			},
+			data : {
+				pageTitle : "Lams Admin | Dashboard"
 			}
 		}).state("admin.lams.lenders", {
 			url : '/lenders',
@@ -66,6 +93,12 @@ app.config([ "$stateProvider", "$urlRouterProvider", "$locationProvider", "$sceD
 			},
 			data : {
 				pageTitle : "Lams Admin | Lenders"
+			},
+			resolve: {
+                lazyLoad: ['$ocLazyLoad', function ($ocLazyLoad) {
+                    return $ocLazyLoad.load({files: [
+                            'usermanagement/lendersCtrl.js']});
+                }]
 			}
 		}).state("admin.lams.borrowers", {
 			url : '/borrowers',
@@ -77,6 +110,12 @@ app.config([ "$stateProvider", "$urlRouterProvider", "$locationProvider", "$sceD
 			},
 			data : {
 				pageTitle : "Lams Admin | Borrowers"
+			},
+			resolve: {
+                lazyLoad: ['$ocLazyLoad', function ($ocLazyLoad) {
+                    return $ocLazyLoad.load({files: [
+                            'usermanagement/borrowersCtrl.js']});
+                }]
 			}
 		});
 		$urlRouterProvider.otherwise("login");
@@ -87,7 +126,7 @@ app.config(['$httpProvider', function ($httpProvider) {
         if ($rootScope.activeCalls == undefined) {
             $rootScope.activeCalls = 0;
         }
-        console.log("$rootScope.activeCalls====>",$rootScope.activeCalls);
+//        console.log("$rootScope.activeCalls====>",$rootScope.activeCalls);
 
         return {
             request: function (config) {
