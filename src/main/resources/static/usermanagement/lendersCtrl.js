@@ -4,7 +4,7 @@ angular.module("lamsAdmin").controller("lendersCtrl", [ "$scope", "$http", "$roo
 		$scope.forms = {};
 		$scope.users = [];
 		$scope.resetUser = function(){
-			$scope.userData = {bank : {},applications: [{}] };
+			$scope.userData = {bank : {}};
 		}
 		$scope.getUsers = function(userType) {
 			//userType is NUll then will fetch all the users
@@ -29,7 +29,10 @@ angular.module("lamsAdmin").controller("lendersCtrl", [ "$scope", "$http", "$roo
 			$scope.userData = angular.copy(user);
 			$scope.userData.password = $scope.userData.tempPassword;
 			$scope.userData.confirmPassword = $scope.userData.tempPassword;
-			console.log("$scope.userData===>",$scope.userData);
+			if(!$rootScope.isEmpty($scope.userData.applications)){
+				$scope.userData.applicationTypeId = $scope.userData.applications[0].applicationTypeId;				
+			}
+			$("#userEmail").focus();
 		}
 
 		$scope.updateLenderDetails = function() {
@@ -45,6 +48,7 @@ angular.module("lamsAdmin").controller("lendersCtrl", [ "$scope", "$http", "$roo
 			$scope.userData.password = $scope.userData.password.trim();
 			$scope.userData.tempPassword = $scope.userData.password;
 			$scope.userData.userType = Constant.UserType.LENDER.id;
+			$scope.userData.applications = [{"applicationTypeId" : $scope.userData.applicationTypeId}];
 			console.log("$scope.userData===>",$scope.userData);
 			userService.updateLenderDetails($scope.userData).then(
 				function(success) {

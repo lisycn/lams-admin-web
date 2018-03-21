@@ -26,7 +26,7 @@ app.directive('isActive', function() {
 	}
 })
 
-module.directive('processLoader', function($http) {
+app.directive('processLoader', function($http) {
 	return {
 		restrict : 'A',
 		replace : true,

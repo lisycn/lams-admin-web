@@ -17,6 +17,7 @@ app.run([ "$rootScope", "$state", "$stateParams", "$http", "$timeout", "$interva
 			userService.logout().then(
 				function(success) {
 					$cookieStore.remove(Constant.TOKEN);
+					$cookieStore.remove(Constant.USER_TYPE);
 					$state.go("login");
 				}, function(error) {
 					$cookieStore.remove(Constant.TOKEN);
@@ -25,7 +26,7 @@ app.run([ "$rootScope", "$state", "$stateParams", "$http", "$timeout", "$interva
 
 		}
 		if ($rootScope.isEmpty($cookieStore.get(Constant.TOKEN))) {
-			$rootScope.doLogout();
+//			$rootScope.doLogout();
 		}
 		$rootScope.validateErrorResponse = function(error) {
 			if (error.status == 401) {
