@@ -1,0 +1,108 @@
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="card">
+				<div class="card-header" data-background-color="purple">
+					<h4 class="title">
+						<b>{{userData.userTypName}} Profile </b></a>
+					</h4>
+					<p class="category">
+						<b>Update Additional Details in Profile</b>
+					</p>
+				</div>
+				<div class="card-content">
+					<form name="lenderForm"
+						data-ng-submit="updateUserDetail()" novalidate>
+						<div class="row">
+							<div class="col-md-3">
+								<div class="form-group">
+									<label class="control-label">Salutation <span
+										class="text-danger">*</span></label> <select class="form-control"
+										data-ng-model="userData.salutation"
+										data-ng-options="salu.id as salu.name for salu in salutations" required>
+										<option value="">Select Salutation</option>
+									</select>
+								</div>
+							</div>
+
+							<div class="col-md-3">
+								<div class="form-group">
+									<label class="control-label">First Name <span
+										class="text-danger">*</span></label> <input type="text"
+										name="firstName" class="form-control"
+										data-ng-model="userData.firstName" required>
+								</div>
+							</div>
+
+							<div class="col-md-3">
+								<div class="form-group">
+									<label class="control-label">Middle Name</label> <input
+										type="text" name="middleName" class="form-control"
+										data-ng-model="userData.middleName">
+								</div>
+							</div>
+
+							<div class="col-md-3">
+								<div class="form-group">
+									<label class="control-label">Last Name <span
+										class="text-danger">*</span></label> <input type="text"
+										name="lastName" class="form-control"
+										data-ng-model="userData.lastName" required>
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-3">
+								<div class="form-group">
+									<label class="control-label">Banks<span
+										class="text-danger">*</span></label> <select class="form-control"
+										data-ng-model="userData.bank.id"
+										data-ng-options="bank.id as bank.name for bank in banks" disabled>
+										<option value="">Select Banks</option>
+									</select>
+								</div>
+							</div>
+
+							<div class="col-md-3">
+								<div class="form-group">
+									<label class="control-label">Application<span
+										class="text-danger">*</span></label> <select class="form-control"
+										data-ng-model="userData.applications[0].applicationTypeId"
+										data-ng-options="appType.id as appType.name for appType in applicationTypes"
+										required disabled>
+										<option value="">Select Application</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="form-group">
+									<label class="control-label">Email address <span
+										class="text-danger">*</span></label> <input id="userEmail"
+										type="email" name="email" class="form-control"
+										data-ng-model="userData.email" required disabled>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="form-group">
+									<label class="control-label">Mobile <span
+										class="text-danger">*</span></label> <input type="text" name="mobile"
+										class="form-control" data-ng-model="userData.mobile" required disabled>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-8"></div>
+							<div class="col-md-4">
+								<div class="pull-right">
+									<button type="submit" class="btn btn-primary" data-ng-disabled="isDisable">Submit</button>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

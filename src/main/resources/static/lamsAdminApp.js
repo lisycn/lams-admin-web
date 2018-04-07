@@ -7,7 +7,8 @@ var app = angular.module("lamsAdmin", [ "ui.router",
 	"ngMessages",
 	"toastr",
 	"ui.bootstrap",
-	"angular-loading-bar"
+	"angular-loading-bar",
+	"ngTable"
 	]);
 
 getUrls().then(bootstrapApplication);
@@ -100,7 +101,22 @@ app.config([ "$stateProvider", "$urlRouterProvider", "$locationProvider", "$sceD
                             'usermanagement/lendersCtrl.js']});
                 }]
 			}
-		}).state("admin.lams.borrowers", {
+		}).state("admin.lams.borrowerProfile", {
+	    	url : '/borrwerProfile/:brId',
+	    	views :  {
+	    		'content@admin' :  {
+	    			templateUrl : 'profiles/borrowerProfile.html',
+	        		controller: 'borrowerProfileCtrl'
+	    		}
+	    	},
+	    	data : {pageTitle : "Lams Admin | Borrower Profile"},
+	    	resolve: {
+	            lazyLoad: ['$ocLazyLoad', function ($ocLazyLoad) {
+	                return $ocLazyLoad.load({files: [
+	                        'profiles/borrowerProfile.js']});
+	            }]
+	    	}
+	   }).state("admin.lams.borrowers", {
 			url : '/borrowers',
 			views : {
 				'content@admin' : {
@@ -118,6 +134,7 @@ app.config([ "$stateProvider", "$urlRouterProvider", "$locationProvider", "$sceD
                 }]
 			}
 		});
+	
 		$urlRouterProvider.otherwise("login");
 	} ]);
 

@@ -10,11 +10,12 @@ app.controller("loginCtrl",["$scope", "$http","$rootScope","userService","Consta
 		}
 		userService.login($scope.login).then(
 	            function(success) {
+	            	console.log(success.data);
 	            	if(success.data.status == 200){
 	            		$cookieStore.put(Constant.TOKEN,success.data.token);
 	            		$rootScope.loadMasters();
 	            		$state.go("admin.lams.dashboard");
-	                }else{
+	                } else{
 	                	Notification.error(success.data.message);
 	                }
 	            }, function(error) {

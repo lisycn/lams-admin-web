@@ -1,0 +1,321 @@
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="card">
+				<div class="card-header" data-background-color="purple">
+					<h4 class="title">
+						<b>{{userData.firstName}}
+							{{userData.lastName}}</b></a>
+					</h4>
+<!-- 					<p class="category"> -->
+<!-- 						<b>{{userData.contactNumber}}</b> -->
+<!-- 					</p> -->
+				</div>
+				<div class="card-content">
+
+					<!-- Personal Details -->
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<b>Borrower Details</b> <a style="margin-top: -2px"
+								class="btn btn-xs pull-right" ng-click="showMore = !showMore">
+								<spna ng-show="!showMore">Show More</spna> <spna
+									ng-show="showMore">Hide</spna>
+							</a>
+						</div>
+						<div class="panel-body">
+
+							<div class="col-md-12">
+								<h5>Personal Details</h5>
+							</div>
+
+							<div class="col-md-4">
+								<label>First Name</label>
+								<div>{{userData.firstName}}</div>
+							</div>
+
+							<div class="col-md-4">
+								<label>Middle Name</label>
+								<div>{{userData.middleName || 'N.A'}}</div>
+							</div>
+
+							<div class="col-md-4">
+								<label>Last Name</label>
+								<div>{{userData.lastName}}</div>
+							</div>
+
+							<div class="col-md-12">
+								<br>
+							</div>
+
+							<div class="col-md-4">
+								<label>Contact Number</label>
+								<div>{{userData.contactNumber || 'N.A'}}</div>
+							</div>
+
+							<div class="col-md-4">
+								<label>Gender</label>
+								<div>{{userData.gender || 'N.A'}}</div>
+							</div>
+
+							<div class="col-md-4">
+								<label>Education Qualification</label>
+								<div>{{userData.eduQualification || 'N.A'}}</div>
+							</div>
+
+							<div class="col-md-12">
+								<br>
+							</div>
+
+							<div ng-if="showMore">
+								<div class="col-md-12">
+									<h5>Employment Details</h5>
+								</div>
+
+								<div class="col-md-4">
+									<label>Employment Type</label>
+									<div>{{userData.employmentType === 1 ? 'Salaried' :
+										userData.employmentType === 2 ? 'Self Employed' : 'N.A'}}</div>
+								</div>
+
+								<div ng-if="userData.employmentType===1">
+									<div class="col-md-4">
+										<label>Employer Name</label>
+										<div>{{userData.employeName || 'N.A'}}</div>
+									</div>
+
+									<div class="col-md-4">
+										<label>Employment Address</label>
+										<div>{{userData.employmentAddress || 'N.A'}}</div>
+									</div>
+
+									<div class="col-md-12">
+										<br>
+									</div>
+
+									<div class="col-md-4">
+										<label>Gross Monthly Income</label>
+										<div>{{userData.grossMonthlyIncome | number : 2 ||
+											'N.A'}}</div>
+									</div>
+
+									<div class="col-md-4">
+										<label>Total Work Experience</label>
+										<div>{{userData.totalWorkExperience || 'N.A'}}</div>
+									</div>
+								</div>
+
+								<div ng-if="userData.employmentType===2">
+									<div class="col-md-4">
+										<label>Entity Name</label>
+										<div>{{userData.entityName || 'N.A'}}</div>
+									</div>
+
+									<div class="col-md-4">
+										<label>Employment Address</label>
+										<div>{{userData.employmentAddress || 'N.A'}}</div>
+									</div>
+								</div>
+
+								<div class="col-md-12">
+									<br>
+								</div>
+
+								<div class="col-md-12">
+									<h5>Permanent Address</h5>
+								</div>
+
+								<div class="col-md-9">
+									<label>Street Name</label>
+									<div>{{userData.permanentAdd.streetName || 'N.A'}}</div>
+								</div>
+
+								<div class="col-md-3">
+									<label>Land Mark</label>
+									<div>{{userData.permanentAdd.landMark || 'N.A'}}</div>
+								</div>
+
+								<div class="col-md-12">
+									<br>
+								</div>
+
+								<div class="col-md-3">
+									<label>City</label>
+									<div>{{userData.permanentAdd.city.name || 'N.A'}}</div>
+								</div>
+
+								<div class="col-md-3">
+									<label>State</label>
+									<div>{{userData.permanentAdd.state.name || 'N.A'}}</div>
+								</div>
+
+								<div class="col-md-3">
+									<label>Country</label>
+									<div>{{userData.permanentAdd.country.name || 'N.A'}}</div>
+								</div>
+
+								<div class="col-md-3">
+									<label>Pincode</label>
+									<div>{{userData.permanentAdd.pincode || 'N.A'}}</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<!-- Loan Details -->
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<b>Existing Loan</b>
+							</div>
+							<div class="panel-body">
+								<div class="list-group"
+									ng-repeat="application in userData.applications | filter : {loanTypeId : Constant.LoanType.EXISTING_LOAN}">
+									<a href="javascript:void(0)"
+										class="list-group-item list-group-item-action flex-column align-items-start">
+										<h4 class="list-group-item-heading">
+											<b>{{application.applicationTypeName}}</b>
+										</h4> <small class="pull-right">{{application.createdDate |
+											date : 'dd-MM-yyyy'}}</small>
+										<p class="list-group-item-text">
+											<b>Amount:</b> {{application.loanAmount | number}} &nbsp <b>Tenure:</b>
+											{{application.tenure || '0'}}
+										</p>
+									</a>
+								</div>
+								<div class="list-group" ng-if="existingAppCount < 1">No
+									Applications Available</div>
+							</div>
+						</div>
+
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<b>New Loan</b>
+							</div>
+							<div class="panel-body">
+								<div class="list-group"
+									ng-repeat="application in userData.applications  | filter : {loanTypeId : Constant.LoanType.CURRENT_LOAN}">
+									<a href="javascript:void(0)"
+										class="list-group-item list-group-item-action flex-column align-items-start">
+										<h4 class="list-group-item-heading">
+											<b>{{application.applicationTypeName}}
+												({{application.leadReferenceNo || 'NA'}})</b>
+										</h4> <small class="pull-right">{{application.createdDate |
+											date : 'dd-MM-yyyy'}}</small>
+										<p class="list-group-item-text">
+											<b>Amount:</b> {{application.loanAmount | number}} &nbsp <b>Tenure:</b>
+											{{application.tenure || '0'}}
+										</p>
+									</a>
+								</div>
+								<div class="list-group" ng-if="curentAppCount < 1">No
+									Applications Available</div>
+							</div>
+						</div>
+
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<b>Closed Loan</b>
+							</div>
+							<div class="panel-body">
+								<div class="list-group"
+									ng-repeat="application in userData.applications  | filter : {loanTypeId : Constant.LoanType.CLOSED_LOAN}">
+									<a href="javascript:void(0)"
+										class="list-group-item list-group-item-action flex-column align-items-start">
+										<h4 class="list-group-item-heading">
+											<b>{{application.applicationTypeName}}</b>
+										</h4> <small class="pull-right">{{application.createdDate |
+											date : 'dd-MM-yyyy'}}</small>
+										<p class="list-group-item-text">
+											<b>Amount:</b> {{application.loanAmount | number}} &nbsp <b>Tenure:</b>
+											{{application.tenure || '0'}}
+										</p>
+									</a>
+								</div>
+								<div class="list-group" ng-if="closedAppCount < 1">No
+									Applications Available</div>
+							</div>
+						</div>
+
+
+					<!-- Doc Details -->
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<b>Documents</b>
+						</div>
+						<div class="panel-body">No Document Attached.</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Respond Modal -->
+<div class="modal fade" id="responseModel" role="dialog">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Approve Loan Request</h4>
+			</div>
+			<div class="modal-body">
+				<form name="responseForm" novalidate>
+					<div class="row">
+						<div class="col-md-3">
+							<div class="form-group">
+								<label class="control-label">Possible Loan Amount - {{respond.canEdit}}<span
+									class="text-danger">*</span></label> <input type="number"
+									class="form-control" data-ng-model="respond.loanPossibleAmount"
+									ng-disabled="!respond.canEdit"
+									name="respond.possibleLoanAmount" ng-required="true">
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="form-group">
+								<label class="control-label">Tenure<span
+									class="text-danger">*</span></label> <input type="number"
+									class="form-control" data-ng-model="respond.tenure" name="tenure"
+									ng-disabled="!respond.canEdit"
+									ng-required="true">
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="form-group">
+								<label class="control-label">Interest Rate<span
+									class="text-danger">*</span></label> <input type="number"
+									class="form-control" data-ng-model="respond.roi"
+									ng-disabled="!respond.canEdit"
+									name="interestRate" ng-required="true">
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="form-group">
+								<label class="control-label">Processing Fees<span
+									class="text-danger">*</span></label> <input type="number"
+									class="form-control" data-ng-model="respond.processingFees"
+									ng-disabled="!respond.canEdit"
+									name="processingFees" ng-required="true">
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="form-group">
+								<label class="control-label">Terms & Conditions<span
+									class="text-danger">*</span></label>
+								<textarea class="form-control" data-ng-model="respond.termAndCondition"
+								ng-disabled="!respond.canEdit"
+									name="terms" ng-required="true"></textarea>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<div class="col-md-12">
+					<button type="button" ng-if="respond.canEdit" class="btn btn-primary" ng-click="submitApproval()" data-dismiss="modal">Submit</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

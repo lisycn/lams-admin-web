@@ -1,5 +1,5 @@
-angular.module("lamsAdmin").controller("lendersCtrl", [ "$scope", "$http", "$rootScope", "Constant", "userService", "Notification",
-	function($scope, $http, $rootScope, Constant, userService, Notification) {
+angular.module("lamsAdmin").controller("lendersCtrl", [ "$scope", "$http", "$rootScope", "Constant", "userService", "Notification", "NgTableParams", "$filter",
+	function($scope, $http, $rootScope, Constant, userService, Notification,NgTableParams, $filter) {
 
 		$scope.forms = {};
 		$scope.users = [];
@@ -12,6 +12,8 @@ angular.module("lamsAdmin").controller("lendersCtrl", [ "$scope", "$http", "$roo
 				function(success) {
 					if (success.data.status == 200) {
 						$scope.users = success.data.data;
+						$scope.userTable.reload();
+	                    $scope.userTable.page(1);						
 						console.log("$scope.users==>", $scope.users);
 					} else if (success.data.status == 400) {
 						Notification.error(success.data.message);
@@ -27,6 +29,7 @@ angular.module("lamsAdmin").controller("lendersCtrl", [ "$scope", "$http", "$roo
 
 		$scope.editUserData = function(user) {
 			$scope.userData = angular.copy(user);
+			$scope.showEditMode = true;
 			$scope.userData.password = $scope.userData.tempPassword;
 			$scope.userData.confirmPassword = $scope.userData.tempPassword;
 			if(!$rootScope.isEmpty($scope.userData.applications)){
@@ -86,5 +89,30 @@ angular.module("lamsAdmin").controller("lendersCtrl", [ "$scope", "$http", "$roo
 					$rootScope.validateErrorResponse(error);
 				});
 		}
+		
+		
+
+		$scope.search = {};
+		$scope.$watch("search.lender", function () {
+            $scope.userTable.reload();
+            $scope.userTable.page(1);
+        });
+		
+		$scope.userTable = new NgTableParams({page: 1, count: 500, sorting: {firstName: "asc"}}, {
+            counts: [],
+            getData: function ($defer, params) {
+                var orderedData = params.sorting() ? $filter('orderBy')($scope.users, params.orderBy()) : $scope.users;
+                if ($scope.search.lender) {
+                    orderedData = $filter('filter')(orderedData, $scope.search.lender);
+                }
+                if (orderedData) {
+                    params.total(orderedData.length);
+                    $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+                }
+            }
+        });
+
+		
+		
 
 	} ]);

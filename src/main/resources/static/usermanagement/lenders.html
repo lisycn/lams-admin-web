@@ -7,70 +7,19 @@
 					<h4 class="title">Lender</h4>
 					<p class="category">List of Lenders are registered in the
 						System</p>
+						<button class="btn btn-xs btn-success pull-right" style="margin-top: -35px" ng-show="!showEditMode" ng-click="showEditMode = true">Add Lender</button>
+						<button class="btn btn-xs btn-default pull-right" style="margin-top: -35px" ng-show="showEditMode" ng-click="showEditMode = false">Cancel</button>
 				</div>
 				<br />
 				<div class="col-md-12 col-sm-12">
-					<div class="panel panel-default">
-						<div class="panel-body">
-							<span>Lenders  <span class="badge">{{users.length}}</span></span>
-						</div>
-
-						<div class="card-content table-responsive">
-							<table class="table">
-								<thead class="text-primary">
-									<tr>
-										<th colspan="10"><input type="text" name="searchData"
-											class="form-control" data-ng-model="searchLender"
-											placeholder="Type anything to search llender"></th>
-									</tr>
-									<tr>
-										<th>Sr No.</th>
-										<th>Lender Name</th>
-										<th>Email</th>
-										<th>Mobile</th>
-										<th>Name</th>
-										<th>Bank/NBFC</th>
-										<th>Product</th>
-										<th>No Of Invitations Sent</th>
-										<th>Active</th>
-										<th>Action</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr data-ng-repeat="user in users | filter : searchLender"
-										class="{{userData.id == user.id ? 'bg-info' : ''}}">
-										<td>{{$index + 1}}</td>
-										<td>{{ (!isEmpty(user.firstName) &&
-											!isEmpty(user.lastName) ? user.firstName + ' ' +
-											user.lastName : user.firstName || Constant.NA )}}</td>
-										<td>{{user.email || Constant.NA}}</td>
-										<td>{{user.mobile || Constant.NA}}</td>
-										<td>{{user.firstName + ' ' + user.lastName || Constant.NA}}</td>
-										<td>{{user.bank.name || Constant.NA}}</td>
-										<td>{{user.applications[0].applicationTypeName || Constant.NA}}</td>
-										<td>{{user.invitationCount || 0}}</td>
-										<td><is-active status="{{user.isActive}}"></is-active></td>
-										<td><button type="button" class="btn btn-primary btn-sm"
-												ng-click="editUserData(user)">Edit</button>
-											<button type="button" class="btn btn-info btn-sm"
-												data-ng-if="user.isActive"
-												ng-click="inviteLender(user,$index)">Invite</button></td>
-									</tr>
-									<tr data-ng-if="isEmpty(users)">
-										<td colspan="9" class="alert alert-default text-center">No
-											Users are registered Yet!</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-					</div>
-
-					<div class="container-fluid">
+				
+				<div class="container-fluid" ng-show="showEditMode">
 						<div class="row">
 							<div class="card">
 								<div class="card-content">
 									<form name="forms.lenderForm"
 										data-ng-submit="updateLenderDetails()" novalidate>
+										<h4>Enter Lender Details</h4>
 										<div class="row">
 											<div class="col-md-3">
 												<div class="form-group">
@@ -185,6 +134,60 @@
 									</form>
 								</div>
 							</div>
+						</div>
+					</div>
+				
+					<div class="panel panel-default">
+						<div class="panel-body">
+							<span>Lenders  <span class="badge">{{users.length}}</span></span>
+						</div>
+
+						<div class="card-content table-responsive">
+							<table ng-table="userTable" class="table">
+								<thead class="text-primary">
+									<tr>
+										<th colspan="15"><input type="text" name="searchData"
+											class="form-control" data-ng-model="search.lender"
+											placeholder="Type anything to search lender"></th>
+									</tr>
+									<tr>
+										<th>Sr No.</th>
+										<th>Lender Name</th>
+										<th>Email</th>
+										<th>Mobile</th>
+<!-- 										<th>Name</th> -->
+										<th>Bank/NBFC</th>
+										<th>Product</th>
+										<th>No Of Invitations Sent</th>
+										<th>Active</th>
+										<th>Action</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat="user in $data">
+                        <th>{{$index + 1}}</th>
+                        <td>
+                        {{ (!isEmpty(user.firstName) && !isEmpty(user.lastName) ? user.firstName + ' ' + user.lastName : user.firstName || Constant.NA )}}
+                        </td>
+                        <td>{{user.email || Constant.NA}}</td>
+                        <td>{{user.email || Constant.NA}}</td>
+                        <td>{{user.bank.name || Constant.NA}}</td>
+                        <td>{{user.applications[0].applicationTypeName || Constant.NA}}</td>
+                        <th>{{user.invitationCount || 0}}</th>
+                        <td><is-active status="{{user.isActive}}"></is-active></td>
+                    	<td>
+                    	<button type="button" class="btn btn-primary btn-sm"
+												ng-click="editUserData(user)">Edit</button>
+											<button type="button" class="btn btn-info btn-sm"
+												data-ng-if="user.isActive"
+												ng-click="inviteLender(user,$index)">Invite</button>
+                    	</td>
+                    </tr>
+                    <tr ng-if="$data.length===0">
+                    	<td colspan="15">Data not found</td>
+                    </tr>
+								</tbody>
+							</table>
 						</div>
 					</div>
 				</div>

@@ -14,6 +14,11 @@ app.constant('Constant', {
 			value : 'All'
 		}
 	},
+	LoanType : {
+		EXISTING_LOAN : 22,
+		CLOSED_LOAN : 25,
+		CURRENT_LOAN : 23
+	},
 	Mode : {
 		ACTIVE :{
 			id : 0,
