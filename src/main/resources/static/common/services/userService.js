@@ -1,6 +1,10 @@
 app.service("userService", [ "httpService", "URLS", "$rootScope","$http",
 		function(httpService, URLS, $rootScope, $http) {
 
+			this.getUserDetailsById = function(userId) {
+				return httpService.get(URLS.user + '/get_user_details_by_id/' + userId);
+			};
+	
 			this.pingRequest = function() {
 				return httpService.get(URLS.user + "/ping");
 			};
@@ -32,4 +36,7 @@ app.service("userService", [ "httpService", "URLS", "$rootScope","$http",
 			this.logout = function() {
 				return httpService.get(URLS.user + "/logout");
 			};
+			
+			
+			
 		} ]);

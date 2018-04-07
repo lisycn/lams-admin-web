@@ -1,5 +1,5 @@
-angular.module("lamsAdmin").controller("borrowersCtrl", [ "$scope", "$http", "$rootScope", "Constant", "userService", "Notification",
-	function($scope, $http, $rootScope, Constant, userService, Notification) {
+angular.module("lamsAdmin").controller("borrowersCtrl", [ "$scope", "$http", "$rootScope", "Constant", "userService", "Notification","NgTableParams","$filter",
+	function($scope, $http, $rootScope, Constant, userService, Notification, NgTableParams, $filter) {
 
 		$scope.forms = {};
 		$scope.userData = {};
@@ -10,7 +10,8 @@ angular.module("lamsAdmin").controller("borrowersCtrl", [ "$scope", "$http", "$r
 				function(success) {
 					if (success.data.status == 200) {
 						$scope.users = success.data.data;
-						console.log("$scope.users==>", $scope.users);
+						$scope.userTable.reload();
+	                    $scope.userTable.page(1);
 					} else if (success.data.status == 400) {
 						Notification.error(success.data.message);
 					} else {
@@ -22,4 +23,26 @@ angular.module("lamsAdmin").controller("borrowersCtrl", [ "$scope", "$http", "$r
 				});
 		}
 		$scope.getUsers(Constant.UserType.BORROWER.id);
+		
+		$scope.search = {};
+		$scope.$watch("search.borrower", function () {
+            $scope.userTable.reload();
+            $scope.userTable.page(1);
+        });
+		
+		$scope.userTable = new NgTableParams({page: 1, count: 500, sorting: {firstName: "asc"}}, {
+            counts: [],
+            getData: function ($defer, params) {
+                var orderedData = params.sorting() ? $filter('orderBy')($scope.users, params.orderBy()) : $scope.users;
+                if ($scope.search.borrower) {
+                    orderedData = $filter('filter')(orderedData, $scope.search.borrower);
+                }
+                if (orderedData) {
+                    params.total(orderedData.length);
+                    $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+                }
+            }
+        });
+		
+		
 	} ]);

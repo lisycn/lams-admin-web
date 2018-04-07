@@ -16,11 +16,11 @@
 						</div>
 
 						<div class="card-content table-responsive">
-							<table class="table">
+							<table ng-table="userTable" class="table">
 								<thead class="text-primary">
 									<tr>
-										<th colspan="5"><input type="text" name="searchData"
-											class="form-control" data-ng-model="searchBorrower"
+										<th colspan="50"><input type="text" name="searchData"
+											class="form-control" data-ng-model="search.borrower"
 											placeholder="Type anything to search Borrower"></th>
 									</tr>
 									<tr>
@@ -29,22 +29,23 @@
 										<th>Email</th>
 										<th>Mobile</th>
 										<th>Active</th>
+										<th>Action</th>
 									</tr>
 								</thead>
 								<tbody>
-									<tr data-ng-repeat="user in users | filter : searchBorrower">
-										<td>{{$index + 1}}</td>
-										<td>{{ (!isEmpty(user.firstName) &&
-											!isEmpty(user.lastName) ? user.firstName + ' ' +
-											user.lastName : user.firstName || Constant.NA )}}</td>
-										<td>{{user.email || Constant.NA}}</td>
-										<td>{{user.mobile || Constant.NA}}</td>
-										<td><is-active status="{{user.isActive}}"></is-active></td>
-									</tr>
-									<tr data-ng-if="isEmpty(users)">
-										<td colspan="5" class="alert alert-default text-center">No
-											Users are registered Yet!</td>
-									</tr>
+									<tr ng-repeat="user in $data">
+                        <td>{{$index + 1}}</td>
+                        <td>
+                        {{ (!isEmpty(user.firstName) && !isEmpty(user.lastName) ? user.firstName + ' ' + user.lastName : user.firstName || Constant.NA )}}
+                        </td>
+                        <td>{{user.email || Constant.NA}}</td>
+                        <td>{{user.email || Constant.NA}}</td>
+                        <td><is-active status="{{user.isActive}}"></is-active></td>
+                    	<td><button ui-sref="admin.lams.borrowerProfile({brId:user.id})" class="btn btn-sm btm-primary">View</button></td>
+                    </tr>
+                    <tr ng-if="$data.length===0">
+                    	<td colspan="10">Data not found</td>
+                    </tr>									
 								</tbody>
 							</table>
 						</div>
