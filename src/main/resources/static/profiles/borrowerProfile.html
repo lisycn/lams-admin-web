@@ -175,10 +175,10 @@
 										<h4 class="list-group-item-heading">
 											<b>{{application.applicationTypeName}}</b>
 										</h4> <small class="pull-right">{{application.createdDate |
-											date : 'dd-MM-yyyy'}}</small>
+											date : 'dd/MM/yyyy'}}</small>
 										<p class="list-group-item-text">
-											<b>Amount:</b> {{application.loanAmount | number}} &nbsp <b>Tenure:</b>
-											{{application.tenure || '0'}}
+											<b>Outstanding Amount:</b> {{application.loanAmount | number}} &nbsp <b>Tenure:</b>
+											{{application.tenure || '0'}} Month
 										</p>
 									</a>
 								</div>
@@ -200,10 +200,10 @@
 											<b>{{application.applicationTypeName}}
 												({{application.leadReferenceNo || 'NA'}})</b>
 										</h4> <small class="pull-right">{{application.createdDate |
-											date : 'dd-MM-yyyy'}}</small>
+											date : 'dd/MM/yyyy'}}</small>
 										<p class="list-group-item-text">
 											<b>Amount:</b> {{application.loanAmount | number}} &nbsp <b>Tenure:</b>
-											{{application.tenure || '0'}}
+											{{application.tenure || '0'}} Month
 										</p>
 									</a>
 								</div>
@@ -224,10 +224,10 @@
 										<h4 class="list-group-item-heading">
 											<b>{{application.applicationTypeName}}</b>
 										</h4> <small class="pull-right">{{application.createdDate |
-											date : 'dd-MM-yyyy'}}</small>
+											date : 'dd/MM/yyyy'}}</small>
 										<p class="list-group-item-text">
 											<b>Amount:</b> {{application.loanAmount | number}} &nbsp <b>Tenure:</b>
-											{{application.tenure || '0'}}
+											{{application.tenure || '0'}} Month
 										</p>
 									</a>
 								</div>
@@ -245,75 +245,6 @@
 						<div class="panel-body">No Document Attached.</div>
 					</div>
 
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-
-<!-- Respond Modal -->
-<div class="modal fade" id="responseModel" role="dialog">
-	<div class="modal-dialog modal-lg">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title">Approve Loan Request</h4>
-			</div>
-			<div class="modal-body">
-				<form name="responseForm" novalidate>
-					<div class="row">
-						<div class="col-md-3">
-							<div class="form-group">
-								<label class="control-label">Possible Loan Amount - {{respond.canEdit}}<span
-									class="text-danger">*</span></label> <input type="number"
-									class="form-control" data-ng-model="respond.loanPossibleAmount"
-									ng-disabled="!respond.canEdit"
-									name="respond.possibleLoanAmount" ng-required="true">
-							</div>
-						</div>
-						<div class="col-md-3">
-							<div class="form-group">
-								<label class="control-label">Tenure<span
-									class="text-danger">*</span></label> <input type="number"
-									class="form-control" data-ng-model="respond.tenure" name="tenure"
-									ng-disabled="!respond.canEdit"
-									ng-required="true">
-							</div>
-						</div>
-						<div class="col-md-3">
-							<div class="form-group">
-								<label class="control-label">Interest Rate<span
-									class="text-danger">*</span></label> <input type="number"
-									class="form-control" data-ng-model="respond.roi"
-									ng-disabled="!respond.canEdit"
-									name="interestRate" ng-required="true">
-							</div>
-						</div>
-						<div class="col-md-3">
-							<div class="form-group">
-								<label class="control-label">Processing Fees<span
-									class="text-danger">*</span></label> <input type="number"
-									class="form-control" data-ng-model="respond.processingFees"
-									ng-disabled="!respond.canEdit"
-									name="processingFees" ng-required="true">
-							</div>
-						</div>
-						<div class="col-md-12">
-							<div class="form-group">
-								<label class="control-label">Terms & Conditions<span
-									class="text-danger">*</span></label>
-								<textarea class="form-control" data-ng-model="respond.termAndCondition"
-								ng-disabled="!respond.canEdit"
-									name="terms" ng-required="true"></textarea>
-							</div>
-						</div>
-					</div>
-				</form>
-			</div>
-			<div class="modal-footer">
-				<div class="col-md-12">
-					<button type="button" ng-if="respond.canEdit" class="btn btn-primary" ng-click="submitApproval()" data-dismiss="modal">Submit</button>
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 				</div>
 			</div>
 		</div>
