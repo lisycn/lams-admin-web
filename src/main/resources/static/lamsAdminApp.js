@@ -150,7 +150,22 @@ app.config([ "$stateProvider", "$urlRouterProvider", "$locationProvider", "$sceD
                             'usermanagement/channelPartnersCtrl.js']});
                 }]
 			}
-		});
+		}).state("admin.lams.channelPartnerProfile", {
+	    	url : '/channelPartnerProfile/:cpId',
+	    	views :  {
+	    		'content@admin' :  {
+	    			templateUrl : 'profiles/channelPartnerProfile.html',
+	        		controller: 'channelPartnerProfileCtrl'
+	    		}
+	    	},
+	    	data : {pageTitle : "Admin | Channel Partner Profile"},
+	    	resolve: {
+	            lazyLoad: ['$ocLazyLoad', function ($ocLazyLoad) {
+	                return $ocLazyLoad.load({files: [
+	                        'profiles/channelPartnerProfileCtrl.js']});
+	            }]
+	    	}
+	   });
 	
 		$urlRouterProvider.otherwise("login");
 	} ]);

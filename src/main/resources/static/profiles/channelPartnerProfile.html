@@ -1,0 +1,48 @@
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="card">
+				<div class="card-header" data-background-color="purple">
+					<h4 class="title">
+						<b>{{userData.name}}</b>
+					</h4>
+				</div>
+				<div class="card-content">
+
+					<!-- Personal Details -->
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<b>Channel Partner Details</b>
+						</div>
+						<div class="panel-body">
+
+							<div class="col-md-12">
+								<h5>Personal Details</h5>
+							</div>
+
+							<div class="col-md-12">
+								<label>Name</label>
+								<div>{{userData.name}}</div>
+							</div>
+
+							<div class="col-md-12">
+								<br>
+							</div>
+
+							<div class="col-md-4">
+								<label>Contact Number</label>
+								<div>{{userData.contactNumber || 'N.A'}}</div>
+							</div>
+
+							<div class="col-md-4">
+								<label>Gender</label>
+								<div>{{userData.gender || 'N.A'}}</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
