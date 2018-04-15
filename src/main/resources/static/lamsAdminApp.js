@@ -47,7 +47,7 @@ app.config([ "$stateProvider", "$urlRouterProvider", "$locationProvider", "$sceD
 				templateUrl : 'common/htmls/login.html',
 				controller : 'loginCtrl',
 				data : {
-					pageTitle : "Lams Admin | Login"
+					pageTitle : "Admin | Login"
 				}
 			})
 			.state("admin.lams", {
@@ -82,7 +82,7 @@ app.config([ "$stateProvider", "$urlRouterProvider", "$locationProvider", "$sceD
                 }]
 			},
 			data : {
-				pageTitle : "Lams Admin | Dashboard"
+				pageTitle : "Admin | Dashboard"
 			}
 		}).state("admin.lams.lenders", {
 			url : '/lenders',
@@ -93,7 +93,7 @@ app.config([ "$stateProvider", "$urlRouterProvider", "$locationProvider", "$sceD
 				}
 			},
 			data : {
-				pageTitle : "Lams Admin | Lenders"
+				pageTitle : "Admin | Lenders"
 			},
 			resolve: {
                 lazyLoad: ['$ocLazyLoad', function ($ocLazyLoad) {
@@ -109,7 +109,7 @@ app.config([ "$stateProvider", "$urlRouterProvider", "$locationProvider", "$sceD
 	        		controller: 'borrowerProfileCtrl'
 	    		}
 	    	},
-	    	data : {pageTitle : "Lams Admin | Borrower Profile"},
+	    	data : {pageTitle : "Admin | Borrower Profile"},
 	    	resolve: {
 	            lazyLoad: ['$ocLazyLoad', function ($ocLazyLoad) {
 	                return $ocLazyLoad.load({files: [
@@ -125,12 +125,29 @@ app.config([ "$stateProvider", "$urlRouterProvider", "$locationProvider", "$sceD
 				}
 			},
 			data : {
-				pageTitle : "Lams Admin | Borrowers"
+				pageTitle : "Admin | Borrowers"
 			},
 			resolve: {
                 lazyLoad: ['$ocLazyLoad', function ($ocLazyLoad) {
                     return $ocLazyLoad.load({files: [
                             'usermanagement/borrowersCtrl.js']});
+                }]
+			}
+		}).state("admin.lams.channelPartners", {
+			url : '/channelPartners',
+			views : {
+				'content@admin' : {
+					templateUrl : 'usermanagement/channelPartners.html',
+					controller : 'channelPartnerCtrl'
+				}
+			},
+			data : {
+				pageTitle : "Admin | channel Partners"
+			},
+			resolve: {
+                lazyLoad: ['$ocLazyLoad', function ($ocLazyLoad) {
+                    return $ocLazyLoad.load({files: [
+                            'usermanagement/channelPartnersCtrl.js']});
                 }]
 			}
 		});

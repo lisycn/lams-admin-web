@@ -4,15 +4,15 @@
 		<div class="col-md-12 col-sm-12">
 			<div class="card">
 				<div class="card-header" data-background-color="purple">
-					<h4 class="title">Borrowers</h4>
-					<p class="category">List of Borrowers are registered in the
+					<h4 class="title">Channel Partners</h4>
+					<p class="category">List of Channel Partner are registered in the
 						System</p>
 				</div>
 				<br />
 				<div class="col-md-12 col-sm-12">
 					<div class="panel panel-default">
 						<div class="panel-body">
-							<span>Borrowers  <span class="badge">{{users.length}}</span></span>
+							<span>Channel Partner <span class="badge">{{users.length}}</span></span>
 						</div>
 
 						<div class="card-content table-responsive">
@@ -20,12 +20,12 @@
 								<thead class="text-primary">
 									<tr>
 										<th colspan="50"><input type="text" name="searchData"
-											class="form-control" data-ng-model="search.borrower"
-											placeholder="Type anything to search Borrower"></th>
+											class="form-control" data-ng-model="search.channelPartner"
+											placeholder="Type anything to search Channel Partner"></th>
 									</tr>
 									<tr>
 										<th>Sr No.</th>
-										<th>Borrower Name</th>
+										<th>Name</th>
 										<th>Email</th>
 										<th>Mobile</th>
 										<th>Active</th>
@@ -33,7 +33,7 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr ng-repeat="user in $data">
+					<tr ng-repeat="user in $data">
                         <td>{{$index + 1}}</td>
                         <td>
                         {{user.name || Constant.NA}}
@@ -41,7 +41,7 @@
                         <td>{{user.email || Constant.NA}}</td>
                         <td>{{user.mobile || Constant.NA}}</td>
                         <td><is-active status="{{user.isActive}}"></is-active></td>
-                    	<td><button ui-sref="admin.lams.borrowerProfile({brId:user.id})" class="btn btn-sm btm-primary">View</button></td>
+                    	<td><button ui-sref="admin.lams.channelPartnerProfile({cpId:user.id})" class="btn btn-sm btm-primary">View</button></td>
                     </tr>
                     <tr ng-if="$data.length===0">
                     	<td colspan="10">Data not found</td>
@@ -55,3 +55,6 @@
 		</div>
 	</div>
 </div>
+
+
+

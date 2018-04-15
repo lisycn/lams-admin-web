@@ -9,6 +9,10 @@ app.constant('Constant', {
 			id : 2,
 			value : 'Borrower'
 		},
+		CHANNEL_PARTNER : {
+			id : 3,
+			value : 'Channel Partner'
+		},
 		ALL : {
 			id : -1,
 			value : 'All'
