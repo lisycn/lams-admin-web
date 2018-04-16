@@ -1,0 +1,178 @@
+
+<div class="col-md-12 col-sm-12 col-lg-12">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card">
+					<div class="card-header" data-background-color="purple">
+						<h4 class="title">
+							<b>{{applicationDetails.applicationTypeName}} <span
+								ng-if="applicationDetails.loanTypeId == Constant.LoanType.CURRENT_LOAN">({{applicationDetails.leadReferenceNo}})</span></b></a>
+						</h4>
+						<p class="pull-right">
+							<button class="btn btn-default" data-ui-sref="admin.lams.borrowerProfile({brId : applicationDetails.createdBy})">Back</button>
+						</p>
+						<p class="category">
+							<b>{{applicationDetails.loanTypeName}}</b>
+							<br/><b>Created Date: {{applicationDetails.createdDate | date :
+								'dd-MM-yyyy'}}</b>
+						</p>
+
+					</div>
+					<div class="card-content">
+
+						<form name="currentForm" novalidate>
+							<div class="row">
+								<div class="col-md-3">
+									<div class="form-group">
+										<label class="control-label">Loan Amount</label> <input
+											type="number" class="form-control"
+											data-ng-disabled="editApplicationForm"
+											data-ng-model="applicationDetails.loanAmount"
+											name="loanAmount" data-ng-required="true">
+									</div>
+								</div>
+								<div class="col-md-3">
+									<div class="form-group">
+										<label class="control-label">Tenure in Month</label> <input
+											type="number" class="form-control"
+											data-ng-disabled="editApplicationForm"
+											data-ng-model="applicationDetails.tenure" name="tenure"
+											data-ng-required="true">
+									</div>
+								</div>
+								<div class="col-md-3"
+									ng-if="applicationDetails.loanTypeId == Constant.LoanType.EXISTING_LOAN">
+									<div class="form-group">
+										<label class="control-label">EMI <span
+											class="text-danger">*</span></label> <input type="number"
+											data-ng-disabled="editApplicationForm" class="form-control"
+											data-ng-model="applicationDetails.emi" name="emi"
+											data-ng-required="true">
+									</div>
+								</div>
+
+								<div class="col-md-3"
+									ng-if="applicationDetails.loanTypeId == Constant.LoanType.EXISTING_LOAN">
+									<div class="form-group">
+										<label class="control-label">Planning to close before
+											Disbursement <span class="text-danger">*</span>
+										</label> &nbsp&nbsp<input type="radio" ng-value="true"
+											data-ng-disabled="editApplicationForm"
+											data-ng-model="applicationDetails.closeBeforeDisbsmnt"
+											name="emi">Yes&nbsp&nbsp <input type="radio"
+											data-ng-disabled="editApplicationForm" ng-value="false"
+											data-ng-model="applicationDetails.closeBeforeDisbsmnt"
+											name="emi"> No
+									</div>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-md-3"
+									ng-if="applicationDetails.applicationTypeId == Constant.ApplicationType.PERSONAL_LOAN">
+									<div class="form-group">
+										<label class="control-label">Reason for Personal Loan</label>
+										<input type="text" class="form-control"
+											data-ng-required="true"
+											data-ng-disabled="editApplicationForm"
+											data-ng-model="applicationDetails.reasonForPl"
+											name="reasonForPl">
+									</div>
+								</div>
+								<div class="col-md-3"
+									ng-if="applicationDetails.applicationTypeId == Constant.ApplicationType.HOME_LOAN">
+									<div class="form-group">
+										<label class="control-label">Property Cost</label> <input
+											type="number" class="form-control" data-ng-required="true"
+											data-ng-disabled="editApplicationForm"
+											data-ng-model="applicationDetails.propertyCost"
+											name="propertyCost">
+									</div>
+								</div>
+								<div class="col-md-3"
+									ng-if="applicationDetails.applicationTypeId == Constant.ApplicationType.HOME_LOAN
+												|| applicationDetails.applicationTypeId == Constant.ApplicationType.LOAN_AGAINST_PROPERTY">
+									<div class="form-group">
+										<label class="control-label">Property Address</label> <input
+											type="text" class="form-control" data-ng-required="true"
+											data-ng-disabled="editApplicationForm"
+											data-ng-model="applicationDetails.propertyAddress"
+											name="propertyAddress">
+									</div>
+								</div>
+								<div class="col-md-3"
+									ng-if="applicationDetails.applicationTypeId == Constant.ApplicationType.LOAN_AGAINST_PROPERTY">
+									<div class="form-group">
+										<label class="control-label">Property Market Value</label> <input
+											type="number" class="form-control" data-ng-required="true"
+											data-ng-disabled="editApplicationForm"
+											data-ng-model="applicationDetails.propertyMarketValue"
+											name="propertyMarketValue">
+									</div>
+								</div>
+								<div class="col-md-3"
+									ng-if="applicationDetails.applicationTypeId == Constant.ApplicationType.CAR_LOAN">
+									<div class="form-group">
+										<label class="control-label">Car Cost</label> <input
+											type="text" class="form-control" data-ng-required="true"
+											data-ng-disabled="editApplicationForm"
+											data-ng-model="applicationDetails.carCost" name="carCost">
+									</div>
+								</div>
+
+								<div class="col-md-3"
+									ng-if="applicationDetails.applicationTypeId == Constant.ApplicationType.LOAN_AGAINST_PROPERTY">
+									<div class="form-group">
+										<label class="control-label">Reason For Lap</label> <input
+											type="text" class="form-control"
+											data-ng-disabled="editApplicationForm"
+											data-ng-model="applicationDetails.reasonForLap"
+											name="reasonForLap">
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<b>Documents</b>
+									</div>
+									<div class="panel-body">
+
+										<div class="panel panel-default"
+											data-ng-repeat="document in documentList">
+											&nbsp;&nbsp;&nbsp;<b>{{document.documentMstrName}}</b>
+											<div class="panel-body">
+												<div class="col-md-2"
+													data-ng-repeat="doc in document.documentResponseList">
+													<div>
+														<a href="{{doc.filePath}}" download
+															class="btn btn-default"> {{doc.originalName}}</a>
+													</div>
+												</div>
+												<div class="col-md-12">
+													<div class="text-center"
+														ng-if="document.documentResponseList.length < 1">
+														<b>No Documents Attached</b>
+													</div>
+												</div>
+											</div>
+
+										</div>
+									</div>
+
+								</div>
+
+							</div>
+
+						</form>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
