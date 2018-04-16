@@ -165,6 +165,21 @@ app.config([ "$stateProvider", "$urlRouterProvider", "$locationProvider", "$sceD
 	                        'profiles/channelPartnerProfileCtrl.js']});
 	            }]
 	    	}
+	   }).state("admin.lams.application", {
+	    	url : '/application/:appCode/:appId/:empType',
+	    	views :  {
+	    		'content@admin' :  {
+	    			templateUrl : 'profiles/application.html',
+	        		controller: 'applicationCtrl'
+	    		}
+	    	},
+	    	data : {pageTitle : "Admin | Borrower Application Details"},
+	    	resolve: {
+	            lazyLoad: ['$ocLazyLoad', function ($ocLazyLoad) {
+	                return $ocLazyLoad.load({files: [
+	                        'profiles/applicationCtrl.js']});
+	            }]
+	    	}
 	   });
 	
 		$urlRouterProvider.otherwise("login");

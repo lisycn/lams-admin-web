@@ -80,3 +80,36 @@ app.service("masterService", [ 'httpService','URLS',"$http",
 		};
 		
 	} ]);
+
+
+
+app.service("documentService", [ 'httpService', 'URLS', "$http",
+	function(httpService, URLS, $http) {
+
+		this.getDocumentList = function(applicationId, data) {
+			return httpService.post(URLS.user + "/getDocuments/" + applicationId, data);
+		};
+
+		this.getUserDocument = function(documentId) {
+			return httpService.get(URLS.user + "/getUserDocuments/" + documentId);
+		};
+
+		this.inActiveDocument = function(documentMappingId) {
+			return httpService.get(URLS.user + "/inActiveDocument/" + documentMappingId);
+		};
+
+
+
+	} ]);
+
+
+
+app.service("applicationService", [ 'httpService', 'URLS', "$rootScope", "$http",
+	function(httpService, URLS, $rootScope, $http) {
+
+		this.getLoanDetails = function(id, appTypeId) {
+			return httpService.get(URLS.user + "/application/getLoanDetails/" + id + "/" + appTypeId);
+		};
+
+
+	} ]);

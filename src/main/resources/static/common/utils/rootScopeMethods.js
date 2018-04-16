@@ -154,5 +154,47 @@ app.run([ "$rootScope", "$state", "$stateParams", "$http", "$timeout", "$interva
 			id : 3,
 			value : 'Third Gender'
 		} ];
+		
+		$rootScope.getAppTypeIdByCode = function(appTypeCode) {
+			switch (appTypeCode) {
+			case Constant.ApplicationTypeCode.HOME_LOAN:
+				return Constant.ApplicationType.HOME_LOAN;
+			case Constant.ApplicationTypeCode.LOAN_AGAINST_PROPERTY:
+				return Constant.ApplicationType.LOAN_AGAINST_PROPERTY;
+			case Constant.ApplicationTypeCode.SECURED_BUSINESS_LOAN:
+				return Constant.ApplicationType.SECURED_BUSINESS_LOAN;
+			case Constant.ApplicationTypeCode.WORKING_CAPITAL_LOAN:
+				return Constant.ApplicationType.WORKING_CAPITAL_LOAN;
+			case Constant.ApplicationTypeCode.EDUCATION_LOAN:
+				return Constant.ApplicationType.EDUCATION_LOAN;
+			case Constant.ApplicationTypeCode.CAR_LOAN:
+				return Constant.ApplicationType.CAR_LOAN;
+			case Constant.ApplicationTypeCode.OVERDRAFT_FACILITIES_LOAN:
+				return Constant.ApplicationType.OVERDRAFT_FACILITIES_LOAN;
+			case Constant.ApplicationTypeCode.DROPLINE_OVERDRAFT_FACILITIES_LOAN:
+				return Constant.ApplicationType.DROPLINE_OVERDRAFT_FACILITIES_LOAN;
+			case Constant.ApplicationTypeCode.BANK_GUARANTEE_LOAN:
+				return Constant.ApplicationType.BANK_GUARANTEE_LOAN;
+			case Constant.ApplicationTypeCode.CC_FACILITIES_LOAN:
+				return Constant.ApplicationType.CC_FACILITIES_LOAN;
+			case Constant.ApplicationTypeCode.TERM_LOAN:
+				return Constant.ApplicationType.TERM_LOAN;
+			case Constant.ApplicationTypeCode.LOAN_AGAINST_FDS:
+				return Constant.ApplicationType.LOAN_AGAINST_FDS;
+			case Constant.ApplicationTypeCode.LOAN_AGAINST_SECURITIS:
+				return Constant.ApplicationType.LOAN_AGAINST_SECURITIS;
+			case Constant.ApplicationTypeCode.PROJECT_FINANCE_LOAN:
+				return Constant.ApplicationType.PROJECT_FINANCE_LOAN;
+			case Constant.ApplicationTypeCode.PRIVATE_EQUITY_FINANCE_LOAN:
+				return Constant.ApplicationType.PRIVATE_EQUITY_FINANCE_LOAN;
+			case Constant.ApplicationTypeCode.GOLD_LOAN:
+				return Constant.ApplicationType.GOLD_LOAN;
+			case Constant.ApplicationTypeCode.OTHER_LOAN:
+				return Constant.ApplicationType.OTHER_LOAN;
+			case Constant.ApplicationTypeCode.PERSONAL_LOAN:
+				return Constant.ApplicationType.PERSONAL_LOAN;
+			}
+			return null;
+		}
 
 	} ]);

@@ -194,7 +194,7 @@
 							<div class="panel-body">
 								<div class="list-group"
 									ng-repeat="application in userData.applications  | filter : {loanTypeId : Constant.LoanType.CURRENT_LOAN}">
-									<a href="javascript:void(0)"
+									<a href="javascript:void(0)" ui-sref="admin.lams.application({appCode : application.applicationTypeCode, appId : application.id,empType : userData.employmentType})"
 										class="list-group-item list-group-item-action flex-column align-items-start">
 										<h4 class="list-group-item-heading">
 											<b>{{application.applicationTypeName}}
