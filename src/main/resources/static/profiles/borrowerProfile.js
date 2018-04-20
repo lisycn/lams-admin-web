@@ -15,6 +15,8 @@ angular.module("lamsAdmin").controller("borrowerProfileCtrl", [ "$scope", "$http
 	                }
 	            }, function(error) {
 	            	$rootScope.validateErrorResponse(error);
-	     });		
+	     });
+		
+		
 	
 }]);
