@@ -3,6 +3,7 @@ app.run([ "$rootScope", "$state", "$stateParams", "$http", "$timeout", "$interva
 		$rootScope.state = $state;
 		$rootScope.stateParams = $stateParams;
 		$rootScope.Constant = Constant;
+		$rootScope.dateFormate = "dd MMM yyyy";
 		$rootScope.isEmpty = function(data) {
 			return (data == null || data == undefined || data == ""
 				|| data == "null" || data == "undefined"
@@ -154,6 +155,17 @@ app.run([ "$rootScope", "$state", "$stateParams", "$http", "$timeout", "$interva
 			id : 3,
 			value : 'Third Gender'
 		} ];
+		
+		
+		$rootScope.getGenderById = function(id){
+
+			for(var i=0;i < $rootScope.genders.length;i++){
+				if(id == $rootScope.genders[i].id){
+					return $rootScope.genders[i].value;
+				}
+			}
+			return '-';
+		}
 		
 		$rootScope.getAppTypeIdByCode = function(appTypeCode) {
 			switch (appTypeCode) {

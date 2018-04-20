@@ -55,7 +55,7 @@
 
 							<div class="col-md-4">
 								<label>Gender</label>
-								<div>{{userData.gender || 'N.A'}}</div>
+								<div>{{getGenderById(userData.gender) || 'N.A'}}</div>
 							</div>
 
 							<div class="col-md-4">
@@ -175,7 +175,7 @@
 										<h4 class="list-group-item-heading">
 											<b>{{application.applicationTypeName}}</b>
 										</h4> <small class="pull-right">{{application.createdDate |
-											date : 'dd/MM/yyyy'}}</small>
+											date : dateFormate}}</small>
 										<p class="list-group-item-text">
 											<b>Outstanding Amount:</b> {{application.loanAmount | number}} &nbsp <b>Tenure:</b>
 											{{application.tenure || '0'}} Month
@@ -200,7 +200,7 @@
 											<b>{{application.applicationTypeName}}
 												({{application.leadReferenceNo || 'NA'}})</b>
 										</h4> <small class="pull-right">{{application.createdDate |
-											date : 'dd/MM/yyyy'}}</small>
+											date : dateFormate}}</small>
 										<p class="list-group-item-text">
 											<b>Amount:</b> {{application.loanAmount | number}} &nbsp <b>Tenure:</b>
 											{{application.tenure || '0'}} Month
@@ -224,7 +224,7 @@
 										<h4 class="list-group-item-heading">
 											<b>{{application.applicationTypeName}}</b>
 										</h4> <small class="pull-right">{{application.createdDate |
-											date : 'dd/MM/yyyy'}}</small>
+											date : dateFormate}}</small>
 										<p class="list-group-item-text">
 											<b>Amount:</b> {{application.loanAmount | number}} &nbsp <b>Tenure:</b>
 											{{application.tenure || '0'}} Month

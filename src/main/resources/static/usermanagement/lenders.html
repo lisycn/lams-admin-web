@@ -183,8 +183,8 @@
 												ng-click="inviteLender(user,$index)">Invite</button>
                     	</td>
                     </tr>
-                    <tr ng-if="$data.length===0">
-                    	<td colspan="15">Data not found</td>
+                    <tr data-ng-if="$data.length===0">
+                    	<td colspan="15" class="text-center">No Lender Found in the System!</td>
                     </tr>
 								</tbody>
 							</table>

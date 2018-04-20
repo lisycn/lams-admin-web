@@ -10,7 +10,7 @@
 								ng-if="applicationDetails.loanTypeId == Constant.LoanType.CURRENT_LOAN">({{applicationDetails.leadReferenceNo}})</span></b></a>
 						</h4>
 						<p class="pull-right">
-							<button class="btn btn-default" data-ui-sref="admin.lams.borrowerProfile({brId : applicationDetails.createdBy})">Back</button>
+							<button class="btn btn-default" onClick="window.history.back()">Back</button>
 						</p>
 						<p class="category">
 							<b>{{applicationDetails.loanTypeName}}</b>
