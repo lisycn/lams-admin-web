@@ -5,7 +5,7 @@
 			<div class="card">
 				<div class="card-header" data-background-color="purple">
 					<h4 class="title">
-						<b>{{userData.name}}</b>
+						<b>{{userData.name}} - {{userData.entityName}} - {{userData.code}}</b>
 					</h4>
 				</div>
 				<div class="card-content">
@@ -18,30 +18,164 @@
 						<div class="panel-body">
 
 							<div class="col-md-12">
-								<h5>Personal Details</h5>
+								<h5><b>Business  Details</b></h5>
 							</div>
 
-							<div class="col-md-12">
-								<label>Name</label>
-								<div>{{userData.name}}</div>
+							<div class="col-md-4">
+								<label>Entity Name</label>
+								<div>{{userData.entityName || "N.A"}}</div>
 							</div>
-
+							
+							<div class="col-md-4">
+								<label>Contact Person Name</label>
+								<div>{{userData.contactPersonName || 'N.A'}}</div>
+							</div>
+							<div class="col-md-4">
+								<label>GST Number</label>
+								<div>{{userData.gstNumber || 'N.A'}}</div>
+							</div>
+							
 							<div class="col-md-12">
 								<br>
 							</div>
 
 							<div class="col-md-4">
-								<label>Contact Number</label>
-								<div>{{userData.contactNumber || 'N.A'}}</div>
+								<label>Business Type</label>
+								<div>{{userData.businessType.name || 'N.A'}}</div>
 							</div>
 
 							<div class="col-md-4">
-								<label>Gender</label>
-								<div>{{userData.gender || 'N.A'}}</div>
+								<label>Email</label>
+								<div>{{userData.email || 'N.A'}}</div>
 							</div>
+							
+							<div class="col-md-4">
+								<label>Mobile</label>
+								<div>{{userData.mobile || 'N.A'}}</div>
+							</div>
+							
+							<div class="col-md-12">
+								<br>
+							</div>
+							
+							<div class="col-md-12">
+								<label>About Me</label>
+								<div>{{userData.aboutMe || 'N.A'}}</div>
+							</div>
+							
+							<div class="col-md-12">
+								<br>
+							</div>
+							
+							<div class="col-md-12">
+								<h5><b>Business Address</b></h5>
+							</div>
+							
+							<div class="col-md-3">
+								<label>Premises Number And Building Name</label>
+								<div>{{userData.communicationAdd.premisesAndBuildingName || 'N.A'}}</div>
+							</div>
+							<div class="col-md-3">
+								<label>Street Name</label>
+								<div>{{userData.communicationAdd.streetName || 'N.A'}}</div>
+							</div>
+							<div class="col-md-3">
+								<label>Land Mark</label>
+								<div>{{userData.communicationAdd.landMark || 'N.A'}}</div>
+							</div>
+							<div class="col-md-3">
+								<label>Pincode</label>
+								<div>{{userData.communicationAdd.pincode || 'N.A'}}</div>
+							</div>
+							
+							<div class="col-md-12">
+								<br>
+							</div>
+							
+							<div class="col-md-3">
+								<label>Country</label>
+								<div>{{userData.communicationAdd.country.name || 'N.A'}}</div>
+							</div>
+							<div class="col-md-3">
+								<label>State</label>
+								<div>{{userData.communicationAdd.state.name || 'N.A'}}</div>
+							</div>
+							<div class="col-md-3">
+								<label>City</label>
+								<div>{{userData.communicationAdd.city.name || 'N.A'}}</div>
+							</div>
+							
 						</div>
 					</div>
 				</div>
+				
+				<div class="card-content">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<b>Clients</b>
+							</div>
+							<div class="panel-body">
+								<div>
+									<table class="table table-striped table-bordered">
+										<thead class="text-primary">
+											<tr>
+												<th style="width: 5%">No.</th>
+												<th>Name</th>
+												<th>Email</th>
+												<th>Mobile</th>
+												<th>Temp Password</th>
+												<th>Action</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr data-ng-repeat-start="borrower in borrowers" class="bg-info">
+												<td>{{$index + 1}}</td>
+												<td>{{borrower.name || 'NA' }}</td>
+												<td>{{borrower.email}}</td>
+												<td>{{borrower.mobile || 'NA' }}</td>
+												<td>{{borrower.tempPassword || 'NA' }}</td>
+												<td><button class="btn btn-primary btn-sm"
+														data-ng-click="borrower.viewMore = !borrower.viewMore">View
+														Applications</button>
+											</tr>
+
+											<tr data-ng-repeat-end >
+												<td colspan="6" data-ng-if="borrower.viewMore">
+													<table class="table table-striped table-bordered"
+														data-ng-if="borrower.viewMore">
+														<thead class="text-primary">
+															<tr>
+																<th style="width: 5%">No.</th>
+																<th>Loan Type</th>
+																<th>Amount (Rs.)</th>
+																<th>Code</th>
+																<th>Status</th>
+															</tr>
+														</thead>
+														<tbody>
+															<tr data-ng-repeat="apps in borrower.applications">
+																<td>{{$index + 1}}</td>
+																<td>{{apps.applicationTypeName || 'NA'}}</td>
+																<td>{{apps.loanAmount || 0 | currency : getCurrencySymbol()}}</td>
+																<td>{{apps.leadReferenceNo || 0}}</td>
+																<td>{{apps.status || "NA"}}</td>
+															</tr>
+														</tbody>
+													</table>
+											</tr>
+
+											<tr data-ng-if="isEmpty(borrowers)">
+												<td colspan="8" class="alert alert-default text-center">No
+													Borrower referred Yet!</td>
+											</tr>
+										</tbody>
+										</td>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+					
 			</div>
 		</div>
 	</div>

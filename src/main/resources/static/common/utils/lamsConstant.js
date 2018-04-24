@@ -58,6 +58,10 @@ app.constant('Constant', {
 		UN_AUTHORIZED : "Unauthorized ! Please Login Again.",
 		BAD_REQUEST : "Invalid Request !"
 	},
+	CURRENCY : {
+		IND : 'IND',
+		DLR : 'DLR'
+	},
 	TOKEN : "TOKEN",
 	EmploymentType : {
 		SALARIED : 1,

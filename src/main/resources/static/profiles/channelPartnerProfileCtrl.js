@@ -13,5 +13,20 @@ angular.module("lamsAdmin").controller("channelPartnerProfileCtrl", [ "$scope", 
 	            }, function(error) {
 	            	$rootScope.validateErrorResponse(error);
 	     });		
+		
+		$scope.getClient = function(userType,userId){
+			userService.getCpUsers(userType,userId).then(
+		            function(success) {
+		            	console.log("success.data==============>",success.data);
+		            	if(success.data.status == 200){
+		            		$scope.borrowers = success.data.data; 
+		                }else{
+		                	Notification.warning(success.data.message);
+		                }
+		            }, function(error) {
+		            	$rootScope.validateErrorResponse(error);
+		     });	
+		}
+		$scope.getClient(Constant.UserType.ALL.id,cpId);
 	
 }]);
