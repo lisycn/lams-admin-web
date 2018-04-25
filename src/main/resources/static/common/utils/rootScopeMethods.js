@@ -167,6 +167,16 @@ app.run([ "$rootScope", "$state", "$stateParams", "$http", "$timeout", "$interva
 			return '-';
 		}
 		
+		$rootScope.getCurrencySymbol = function(code){
+			switch (code) {
+			case Constant.CURRENCY.DLR:
+				return "$ ";
+			default:
+				return "₹ ";
+			}
+			return "₹ ";
+		}
+		
 		$rootScope.getAppTypeIdByCode = function(appTypeCode) {
 			switch (appTypeCode) {
 			case Constant.ApplicationTypeCode.HOME_LOAN:

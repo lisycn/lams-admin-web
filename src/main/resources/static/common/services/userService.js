@@ -37,6 +37,8 @@ app.service("userService", [ "httpService", "URLS", "$rootScope","$http",
 				return httpService.get(URLS.user + "/logout");
 			};
 			
-			
+			this.getCpUsers = function(userType,userId) {
+				return httpService.get(URLS.user + '/get_cp_users/' + userType + "/" + userId);
+			};
 			
 		} ]);
