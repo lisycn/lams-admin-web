@@ -12,95 +12,115 @@
 					</p>
 				</div>
 				<div class="card-content">
-					<form name="lenderForm"
-						data-ng-submit="updateUserDetail()" novalidate>
-						<div class="row">
-							<div class="col-md-3">
-								<div class="form-group">
-									<label class="control-label">Salutation <span
-										class="text-danger">*</span></label> <select class="form-control"
-										data-ng-model="userData.salutation"
-										data-ng-options="salu.id as salu.name for salu in salutations" required>
-										<option value="">Select Salutation</option>
-									</select>
-								</div>
-							</div>
-
-							<div class="col-md-3">
-								<div class="form-group">
-									<label class="control-label">First Name <span
-										class="text-danger">*</span></label> <input type="text"
-										name="firstName" class="form-control"
-										data-ng-model="userData.firstName" required>
-								</div>
-							</div>
-
-							<div class="col-md-3">
-								<div class="form-group">
-									<label class="control-label">Middle Name</label> <input
-										type="text" name="middleName" class="form-control"
-										data-ng-model="userData.middleName">
-								</div>
-							</div>
-
-							<div class="col-md-3">
-								<div class="form-group">
-									<label class="control-label">Last Name <span
-										class="text-danger">*</span></label> <input type="text"
-										name="lastName" class="form-control"
-										data-ng-model="userData.lastName" required>
-								</div>
-							</div>
+				
+				<div class="panel panel-default">
+						<div class="panel-heading">
+							<b>Lender Details</b>
 						</div>
+						<div class="panel-body">
 
-						<div class="row">
-							<div class="col-md-3">
-								<div class="form-group">
-									<label class="control-label">Banks<span
-										class="text-danger">*</span></label> <select class="form-control"
-										data-ng-model="userData.bank.id"
-										data-ng-options="bank.id as bank.name for bank in banks" disabled>
-										<option value="">Select Banks</option>
-									</select>
-								</div>
+							<div class="col-md-12">
+								<h5><b>Personal  Details</b></h5>
 							</div>
 
-							<div class="col-md-3">
-								<div class="form-group">
-									<label class="control-label">Application<span
-										class="text-danger">*</span></label> <select class="form-control"
-										data-ng-model="userData.applications[0].applicationTypeId"
-										data-ng-options="appType.id as appType.name for appType in applicationTypes"
-										required disabled>
-										<option value="">Select Application</option>
-									</select>
-								</div>
-							</div>
-							<div class="col-md-3">
-								<div class="form-group">
-									<label class="control-label">Email address <span
-										class="text-danger">*</span></label> <input id="userEmail"
-										type="email" name="email" class="form-control"
-										data-ng-model="userData.email" required disabled>
-								</div>
-							</div>
-							<div class="col-md-3">
-								<div class="form-group">
-									<label class="control-label">Mobile <span
-										class="text-danger">*</span></label> <input type="text" name="mobile"
-										class="form-control" data-ng-model="userData.mobile" required disabled>
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-8"></div>
 							<div class="col-md-4">
-								<div class="pull-right">
-									<button type="submit" class="btn btn-primary" data-ng-disabled="isDisable">Submit</button>
-								</div>
+								<label>Name</label>
+								<div>{{userData.firstName}} {{userData.middleName}} {{userData.lastName}}</div>
 							</div>
+							
+							<div class="col-md-4">
+								<label>Bank</label>
+								<div>{{userData.bank.name || 'N.A'}}</div>
+							</div>
+							
+							<div class="col-md-4">
+								<label>Application</label>
+								<div>{{userData.applications[0].applicationTypeName || 'N.A'}}</div>
+							</div>
+							<div class="col-md-12">
+								<br>
+							</div>
+							
+							<div class="col-md-12">
+								<h5><b>Contact Details</b></h5>
+							</div>
+							
+							<div class="col-md-4">
+								<label>Email</label>
+								<div>{{userData.email || 'N.A'}}</div>
+							</div>
+							
+							<div class="col-md-4">
+								<label>Mobile</label>
+								<div>{{userData.mobile || 'N.A'}}</div>
+							</div>
+							
 						</div>
-					</form>
+					</div>
+					
+						<!-- Loan Details -->
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<b>Application Details</b>
+						</div>
+						<div class="panel-body">
+							<table class="table table-striped table-bordered">
+								<thead class="text-primary">
+									<tr>
+										<th style="width: 5%">No.</th>
+										<th>Lead Reference No.</th>
+										<th>Application</th>
+										<th>Amount</th>
+										<th>Tenure</th>
+										<th>Status</th>
+										<th style="width: 5%">Action</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr data-ng-repeat-start="app in connections">
+										<td>{{$index + 1}}</td>
+										<td>{{app.application.leadReferenceNo || Constant.NA }}</td>
+										<td>{{app.application.applicationTypeName || Constant.NA}}</td>
+										<td>{{app.application.loanAmount | number : 2 || Constant.NA}}</td>
+										<td>{{app.application.tenure || Constant.NA}} Month</td>
+										<td>{{app.status || 'NA'}}</td>
+										<td>
+											<button class="btn btn-default btn-sm" data-ng-click="app.viewMore = !app.viewMore">{{app.viewMore ? 'Less'  : 'More'}}</button>
+										</td>
+									</tr>
+									<tr data-ng-repeat-end class="bg-info">
+									<td colspan="7" data-ng-if="app.viewMore">
+										<table class="table table-striped table-bordered">
+										<thead>
+										<tr>
+											<th class="text-primary">Possible Loan Amount</th>
+											<td>{{app.loanPossibleAmount || 0 | currency : getCurrencySymbol()}}</td>
+											<th class="text-primary">Tenure (Months)</th>
+											<td>{{app.tenure || 'NA'}}</td>
+										</tr>
+										<tr>
+											<th class="text-primary">ROI(%)</th>
+											<td>{{app.roi || 'NA'}}</td>
+											<th class="text-primary">Processing Fees</th>
+											<td>{{app.processingFees || 0 | currency : getCurrencySymbol()}}</td>
+										</tr>
+										<tr>
+											<th class="text-primary" colspan="1">Terms and Conditions</th>
+											<td colspan="3">{{app.termAndCondition || 'NA'}}</td>
+										</tr>
+										</thead>
+										</table>
+									</td>
+									</tr>
+									<tr data-ng-if="isEmpty(connections)">
+										<td colspan="6" class="alert alert-default text-center">
+											No Applications!</td>
+									</tr>
+								</tbody>
+							</table>
+
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

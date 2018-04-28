@@ -24,6 +24,10 @@ app.service("userService", [ "httpService", "URLS", "$rootScope","$http",
 			this.getLoggedInUserDetail = function() {
 				return httpService.get(URLS.user + '/get_user_details');
 			};
+			
+			this.getUserDetailById = function(id) {
+				return httpService.get(URLS.user + '/get_user_details/' + id);
+			};
 
 			this.login = function(data) {
 				return httpService.post(URLS.user + "/login", data);

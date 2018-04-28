@@ -110,6 +110,10 @@ app.service("applicationService", [ 'httpService', 'URLS', "$rootScope", "$http"
 		this.getLoanDetails = function(id, appTypeId) {
 			return httpService.get(URLS.user + "/application/getLoanDetails/" + id + "/" + appTypeId);
 		};
+		
+		this.getConnectionByLenderId = function(id) {
+			return httpService.get(URLS.user + "/application/get_connection_by/" + id );
+		};
 
 
 	} ]);
