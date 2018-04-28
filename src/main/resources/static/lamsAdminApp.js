@@ -84,7 +84,22 @@ app.config([ "$stateProvider", "$urlRouterProvider", "$locationProvider", "$sceD
 			data : {
 				pageTitle : "Admin | Dashboard"
 			}
-		}).state("admin.lams.lenders", {
+		}).state("admin.lams.lenderProfile", {
+	    	url : '/lenderProfile/:ldId',
+	    	views :  {
+	    		'content@admin' :  {
+	    			templateUrl : 'profiles/ldProfile.html',
+	        		controller: 'ldProfileCtrl'
+	    		}
+	    	},
+	    	data : {pageTitle : "Admin | Lender Profile"},
+	    	resolve: {
+	            lazyLoad: ['$ocLazyLoad', function ($ocLazyLoad) {
+	                return $ocLazyLoad.load({files: [
+	                        'profiles/ldProfileCtrl.js']});
+	            }]
+	    	}
+	   }).state("admin.lams.lenders", {
 			url : '/lenders',
 			views : {
 				'content@admin' : {

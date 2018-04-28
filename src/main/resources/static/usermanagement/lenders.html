@@ -181,6 +181,10 @@
 											<button type="button" class="btn btn-info btn-sm"
 												data-ng-if="user.isActive"
 												ng-click="inviteLender(user,$index)">Invite</button>
+												
+												<button type="button" class="btn btn-default btn-sm"
+												data-ng-if="user.isActive"
+												data-ui-sref="admin.lams.lenderProfile({ldId : user.id})">View</button>
                     	</td>
                     </tr>
                     <tr data-ng-if="$data.length===0">
