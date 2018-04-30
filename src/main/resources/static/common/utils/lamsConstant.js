@@ -23,6 +23,13 @@ app.constant('Constant', {
 		CLOSED_LOAN : 25,
 		CURRENT_LOAN : 23
 	},
+	Status :  {
+		OPEN : "OPEN",
+		RESPONDED : "RESPONDED",
+		ACCEPTED : "ACCEPTED",
+		REJECTED : "REJECTED",
+		NOTINTERESTED : "NOTINTERESTED"
+	},
 	Mode : {
 		ACTIVE :{
 			id : 0,
@@ -31,7 +38,7 @@ app.constant('Constant', {
 			id : 1,
 			value : "INActive"
 		},BOTH :{
-			id : 2,
+			id : -1,
 			value : "Both"
 		}
 	},documentType : {

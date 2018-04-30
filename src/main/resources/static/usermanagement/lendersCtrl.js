@@ -90,7 +90,6 @@ angular.module("lamsAdmin").controller("lendersCtrl", [ "$scope", "$http", "$roo
 				});
 		}
 		
-		
 
 		$scope.search = {};
 		$scope.$watch("search.lender", function () {

@@ -164,10 +164,10 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr ng-repeat="user in $data">
+									<tr data-ng-repeat="user in $data">
                         <th>{{$index + 1}}</th>
                         <td>
-                        {{ (!isEmpty(user.firstName) && !isEmpty(user.lastName) ? user.firstName + ' ' + user.lastName : user.firstName || Constant.NA )}}
+                        {{ getFullName(user) }}
                         </td>
                         <td>{{user.email || Constant.NA}}</td>
                         <td>{{user.mobile || Constant.NA}}</td>

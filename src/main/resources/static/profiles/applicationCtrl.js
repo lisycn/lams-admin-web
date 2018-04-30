@@ -5,6 +5,8 @@ angular.module("lamsAdmin").controller("applicationCtrl", [ "$scope", "$rootScop
 		$scope.applicationTypeId = $rootScope.getAppTypeIdByCode($scope.applicationTypeCode);
 		$scope.applicationId = $stateParams.appId;
 		$scope.editApplicationForm = true;
+		$scope.statuses = [ Constant.Status.RESPONDED, Constant.Status.ACCEPTED, Constant.Status.REJECTED ];
+		$scope.status = Constant.Status.RESPONDED;
 		$scope.employmentType = $stateParams.empType;
 		
 		$scope.getApplicationDetails = function() {
@@ -51,7 +53,21 @@ angular.module("lamsAdmin").controller("applicationCtrl", [ "$scope", "$rootScop
 					$rootScope.validateErrorResponse(error);
 				});
 		}
+		
+		$scope.getConnections = function(appId, status) {
+			applicationService.getConnections(appId, status).then(
+				function(success) {
+					if (success.data.status == 200) {
+						$scope.connections = success.data.data;
+					} else {
+						Notification.error(success.data.message);
+					}
+				}, function(error) {
+					$rootScope.validateErrorResponse(error);
+				});
+		};
 
+		$scope.getConnections($scope.applicationId, Constant.Status.RESPONDED);
 
 
 		

@@ -13,8 +13,8 @@
 							<button class="btn btn-default" onClick="window.history.back()">Back</button>
 						</p>
 						<p class="category">
-							<b>{{applicationDetails.loanTypeName}}</b>
-							<br/><b>Created Date: {{applicationDetails.createdDate | date :
+							<b>{{applicationDetails.loanTypeName}}</b> <br />
+							<b>Created Date: {{applicationDetails.createdDate | date :
 								'dd-MM-yyyy'}}</b>
 						</p>
 
@@ -132,6 +132,7 @@
 									</div>
 								</div>
 							</div>
+
 							<div class="row">
 								<div class="panel panel-default">
 									<div class="panel-heading">
@@ -162,8 +163,85 @@
 									</div>
 
 								</div>
-
 							</div>
+
+							<div class="row">
+								<div class="col-md-12">
+									<div class="panel panel-default"
+										data-ng-if="applicationDetails.loanTypeId != Constant.LoanType.EXISTING_LOAN && applicationDetails.loanTypeId != Constant.LoanType.CLOSED_LOAN">
+										<div class="panel-heading">
+											<b>Lender Responses</b>&nbsp;&nbsp;<span class="badge">{{connections.length}}</span><select class="form-control"
+												data-ng-model="status"
+												data-ng-options="status as status for status in statuses"
+												data-ng-change="getConnections(applicationId,status)">
+											</select>
+										</div>
+										<div class="panel-body">
+											<table class="table table-striped custom-table">
+												<thead class="text-primary">
+													<tr>
+														<th style="width: 5%">No.</th>
+														<th>Bank</th>
+														<th>Loan Possible Amount</th>
+														<th>ROI</th>
+														<th>Tenure</th>
+														<th>Processing Fees</th>
+														<th>Terms and Conditions</th>
+														<th>Status</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr data-ng-repeat-start="con in connections">
+														<td>{{$index + 1}}</td>
+														<td>{{con.applicationMappingBO.user.bank.name ||
+															Constant.NA }}</td>
+														<td>{{con.loanPossibleAmount || Constant.NA}}</td>
+														<td>{{con.roi | number : 2 || Constant.NA}}</td>
+														<td>{{con.tenure || Constant.NA}} Month</td>
+														<td>{{con.processingFees || Constant.NA}}</td>
+														<td>{{con.termAndCondition || Constant.NA}}</td>
+														<td>{{con.status || 'NA'}}</td>
+													</tr>
+
+													<tr data-ng-repeat-end>
+														<td colspan="8" data-ng-show="con.isView">
+															<table class="table table-striped table-bordered">
+																<thead class="text-primary">
+																	<tr>
+																		<th>Name</th>
+																		<th>Email</th>
+																		<th>Mobile</th>
+																	</tr>
+																</thead>
+																<tbody>
+																	<tr>
+																		<td>{{(!isEmpty(con.applicationMappingBO.user.firstName)
+																			&& !isEmpty(con.applicationMappingBO.user.lastName) ?
+																			user.firstName + ' ' +
+																			con.applicationMappingBO.user.lastName :
+																			con.applicationMappingBO.user.firstName ||
+																			Constant.NA )}}</td>
+																		<td>{{con.applicationMappingBO.user.email ||
+																			Constant.NA }}</td>
+																		<td>{{con.applicationMappingBO.user.mobile ||
+																			Constant.NA}}</td>
+																	</tr>
+																</tbody>
+															</table>
+														</td>
+													</tr>
+													<tr data-ng-if="isEmpty(connections)">
+														<td colspan="8" class="alert alert-default text-center">No
+															{{status}} Response Yet!</td>
+													</tr>
+												</tbody>
+											</table>
+
+										</div>
+									</div>
+								</div>
+							</div>
+
 
 						</form>
 
