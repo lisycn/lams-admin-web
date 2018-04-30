@@ -168,7 +168,46 @@
 								<b>Existing Loan</b>
 							</div>
 							<div class="panel-body">
-								<div class="list-group"
+							
+							<table class="table table-striped custom-table">
+										<thead class="text-primary">
+											<tr>
+												<th style="width: 5%">No.</th>
+												<th>Application Type</th>
+												<th>Outstanding Amount (Rs.)</th>
+												<th>EMI (Rs.)</th>
+												<th>Tenure (Month)</th>
+												<th>Created Date</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr
+												data-ng-repeat="application in userData.applications | filter : {loanTypeId : Constant.LoanType.EXISTING_LOAN}">
+												<td>{{$index + 1}}</td>
+												<td>{{application.applicationTypeName || Constant.NA }}</td>
+												<td>{{application.loanAmount || 0 | currency : getCurrencySymbol()}}</td>
+												<td>{{application.emi || '0' | currency : getCurrencySymbol()}}</td>
+												<td>{{application.tenure || '0'}}</td>
+												<td>{{application.createdDate | date : dateFormate}}</td>
+											</tr>
+											<!-- <tr data-ng-if="applicationList.length > 0">
+												<th colspan="2">Total</th>
+												<th>{{totalExistingLoanAmount || 0 | currency : getCurrencySymbol()}}</th>
+												<th>{{totalExistingLoanEMI || 0 | currency : getCurrencySymbol()}}</th>
+												<td>-</td>
+												<td>-</td>
+												<td> - </td>
+											</tr> -->
+
+											<tr data-ng-if="existingAppCount < 1">
+												<td colspan="8" class="alert alert-default text-center">No
+													Application Available!</td>
+											</tr>
+										</tbody>
+									</table>
+									
+							
+								<!-- <div class="list-group"
 									ng-repeat="application in userData.applications | filter : {loanTypeId : Constant.LoanType.EXISTING_LOAN}">
 									<a href="javascript:void(0)"
 										class="list-group-item list-group-item-action flex-column align-items-start">
@@ -181,9 +220,9 @@
 											{{application.tenure || '0'}} Month
 										</p>
 									</a>
-								</div>
-								<div class="list-group" ng-if="existingAppCount < 1">No
-									Applications Available</div>
+								</div> -->
+								<!-- <div class="list-group" ng-if="existingAppCount < 1">No
+									Applications Available</div> -->
 							</div>
 						</div>
 
@@ -192,7 +231,39 @@
 								<b>New Loan</b>
 							</div>
 							<div class="panel-body">
-								<div class="list-group"
+							<table class="table table-striped custom-table">
+										<thead class="text-primary">
+											<tr>
+												<th style="width: 5%">No.</th>
+												<th>Application Type</th>
+												<th>Lead Reference No</th>
+												<th>Amount (Rs.)</th>
+												<th>Tenure (Month)</th>
+												<th>Created Date</th>
+												<th>Action</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr data-ng-repeat="application in userData.applications  | filter : {loanTypeId : Constant.LoanType.CURRENT_LOAN}" class="{{application.status == acceptedStatus ? 'success' : ''}}">
+												<td>{{$index + 1}}</td>
+												<td>{{application.applicationTypeName || Constant.NA }}</td>
+												<td>{{application.leadReferenceNo || 'NA'}}</td>
+												<td>{{application.loanAmount  | currency : getCurrencySymbol()}}</td>
+												<td>{{application.tenure || '0'}}</td>
+												<td>{{application.createdDate | date : dateFormate}}</td>
+												<td><button class="btn btn-primary btn-sm"
+														data-ui-sref="admin.lams.application({appCode : application.applicationTypeCode, appId : application.id,empType : userData.employmentType})"
+														data-toggle="modal" data-target="#responseModel">View</button>
+											</tr>
+
+											<tr data-ng-if="curentAppCount < 1">
+												<td colspan="8" class="alert alert-default text-center">No
+													Application Available!</td>
+											</tr>
+										</tbody>
+									</table>
+							
+								<!-- <div class="list-group"
 									ng-repeat="application in userData.applications  | filter : {loanTypeId : Constant.LoanType.CURRENT_LOAN}">
 									<a href="javascript:void(0)" ui-sref="admin.lams.application({appCode : application.applicationTypeCode, appId : application.id,empType : userData.employmentType})"
 										class="list-group-item list-group-item-action flex-column align-items-start">
@@ -208,7 +279,7 @@
 									</a>
 								</div>
 								<div class="list-group" ng-if="curentAppCount < 1">No
-									Applications Available</div>
+									Applications Available</div> -->
 							</div>
 						</div>
 
@@ -217,7 +288,37 @@
 								<b>Closed Loan</b>
 							</div>
 							<div class="panel-body">
-								<div class="list-group"
+							<table class="table table-striped custom-table">
+										<thead class="text-primary">
+											<tr>
+												<th style="width: 5%">No.</th>
+												<th>Application Type</th>
+												<th>Bank/Financial Institution Name</th>
+												<th>Loan Account Number</th>
+												<th>Amount (Rs.)</th>
+												<th>Tenure (Month.)</th>
+												<th>Created Date</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr data-ng-repeat="application in userData.applications  | filter : {loanTypeId : Constant.LoanType.CLOSED_LOAN}">
+												<td>{{$index + 1}}</td>
+												<td>{{application.applicationTypeName || Constant.NA }}</td>
+												<td>{{application.bankName || 'NA' }}</td>
+												<td>{{application.bankAccNumber || 'NA' }}</td>
+												<td>{{application.loanAmount  | currency : getCurrencySymbol()}}</td>
+												<td>{{application.tenure || '0'}}</td>
+												<td>{{application.createdDate | date : dateFormate}}</td>
+											</tr>
+
+											<tr data-ng-if="closedAppCount < 1">
+												<td colspan="8" class="alert alert-default text-center">No
+													Application Available!</td>
+											</tr>
+										</tbody>
+									</table>
+							
+								<!-- <div class="list-group"
 									ng-repeat="application in userData.applications  | filter : {loanTypeId : Constant.LoanType.CLOSED_LOAN}">
 									<a href="javascript:void(0)"
 										class="list-group-item list-group-item-action flex-column align-items-start">
@@ -232,7 +333,7 @@
 									</a>
 								</div>
 								<div class="list-group" ng-if="closedAppCount < 1">No
-									Applications Available</div>
+									Applications Available</div> -->
 							</div>
 						</div>
 

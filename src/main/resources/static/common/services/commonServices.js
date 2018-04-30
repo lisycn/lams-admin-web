@@ -114,6 +114,10 @@ app.service("applicationService", [ 'httpService', 'URLS', "$rootScope", "$http"
 		this.getConnectionByLenderId = function(id) {
 			return httpService.get(URLS.user + "/application/get_connection_by/" + id );
 		};
+		
+		this.getConnections = function(appId,status) {
+			return httpService.get(URLS.user + "/application/get_connections/" + appId + "/" + status);
+		};
 
 
 	} ]);

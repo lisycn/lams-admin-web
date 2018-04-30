@@ -138,7 +138,7 @@ app.run([ "$rootScope", "$state", "$stateParams", "$http", "$timeout", "$interva
 			$rootScope.getLoggedInUserDetail();
 			$rootScope.getSalutations(Constant.Mode.ACTIVE.id);
 			$rootScope.getBanks(Constant.Mode.ACTIVE.id);
-			$rootScope.getApplicationTypes(Constant.Mode.ACTIVE.id);
+			$rootScope.getApplicationTypes(Constant.Mode.BOTH.id);
 		}
 
 		//Getting All Masters
@@ -156,6 +156,18 @@ app.run([ "$rootScope", "$state", "$stateParams", "$http", "$timeout", "$interva
 			value : 'Third Gender'
 		} ];
 		
+		
+		$rootScope.getFullName = function(user){
+			if(!$rootScope.isEmpty(user.firstName) && !$rootScope.isEmpty(user.lastName) && !$rootScope.isEmpty(user.middleName)){
+				return user.firstName + " " + user.middleName + " " + user.lastName;
+			}else if(!$rootScope.isEmpty(user.firstName) && !$rootScope.isEmpty(user.lastName) && $rootScope.isEmpty(user.middleName)){
+				return user.firstName + " " + user.lastName;
+			}else if(!$rootScope.isEmpty(user.firstName) && $rootScope.isEmpty(user.lastName) && $rootScope.isEmpty(user.middleName)){
+				return user.firstName;
+			}else{
+				return "NA";
+			}
+		}
 		
 		$rootScope.getGenderById = function(id){
 
