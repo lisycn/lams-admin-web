@@ -62,7 +62,26 @@
 								<label>Education Qualification</label>
 								<div>{{userData.eduQualification || 'N.A'}}</div>
 							</div>
-
+							
+							<div class="col-md-12">
+								<br>
+							</div>
+							
+							<div class="col-md-4">
+								<label>Date Of Birth</label>
+								<div>{{userData.birthDate | date : dateFormate}}</div>
+							</div>
+							
+							<div class="col-md-4">
+								<label>Aadhaar Card Number</label>
+								<div>{{userData.aadharCardNo || 'N.A'}}</div>
+							</div>
+							
+							<div class="col-md-4">
+								<label>PAN Number</label>
+								<div>{{userData.panCard || 'N.A'}}</div>
+							</div>
+							
 							<div class="col-md-12">
 								<br>
 							</div>
@@ -81,13 +100,13 @@
 								<div ng-if="userData.employmentType===1">
 									<div class="col-md-4">
 										<label>Employer Name</label>
-										<div>{{userData.employeName || 'N.A'}}</div>
+										<div>{{userData.employerName || 'N.A'}}</div>
 									</div>
 
-									<div class="col-md-4">
-										<label>Employment Address</label>
-										<div>{{userData.employmentAddress || 'N.A'}}</div>
-									</div>
+<!-- 									<div class="col-md-4"> -->
+<!-- 										<label>Employment Address</label> -->
+<!-- 										<div>{{userData.employmentAddress || 'N.A'}}</div> -->
+<!-- 									</div> -->
 
 									<div class="col-md-12">
 										<br>
@@ -111,11 +130,35 @@
 										<div>{{userData.entityName || 'N.A'}}</div>
 									</div>
 
-									<div class="col-md-4">
-										<label>Employment Address</label>
-										<div>{{userData.employmentAddress || 'N.A'}}</div>
-									</div>
+<!-- 									<div class="col-md-4"> -->
+<!-- 										<label>Employment Address</label> -->
+<!-- 										<div>{{userData.employmentAddress || 'N.A'}}</div> -->
+<!-- 									</div> -->
 								</div>
+								
+							<div class="col-md-12">
+									<br>
+								</div>
+								
+							<div class="col-md-12">
+									<h5>Employment Address</h5>
+								</div>							
+							<div data-ng-if="userData.employmentType == 2 || userData.employmentType == 1">
+							<div class="col-md-6">
+								<label>Premises No And Building</label>
+								<div>{{userData.employmentAddress.premisesAndBuildingName || 'N.A'}}</div>
+							</div>
+
+							<div class="col-md-3">
+								<label>Street Name </label>
+								<div>{{userData.employmentAddress.streetName || 'N.A'}}</div>
+							</div>
+							<div class="col-md-3">
+								<label>Land Mark</label>
+								<div>{{userData.employmentAddress.landMark || 'N.A'}}</div>
+							</div>
+						</div>
+								
 
 								<div class="col-md-12">
 									<br>
@@ -125,7 +168,12 @@
 									<h5>Permanent Address</h5>
 								</div>
 
-								<div class="col-md-9">
+								<div class="col-md-6">
+									<label>Premises and Building Name</label>
+									<div>{{userData.permanentAdd.premisesAndBuildingName || 'N.A'}}</div>
+								</div>
+                                                            
+                                                                <div class="col-md-3">
 									<label>Street Name</label>
 									<div>{{userData.permanentAdd.streetName || 'N.A'}}</div>
 								</div>
@@ -158,8 +206,55 @@
 									<label>Pincode</label>
 									<div>{{userData.permanentAdd.pincode || 'N.A'}}</div>
 								</div>
+                                                            
+                                                                <div class="col-md-12">
+									<br>
+								</div>
+
+								<div class="col-md-12">
+									<h5>Communication Address</h5>
+								</div>
+
+								<div class="col-md-6">
+									<label>Premises and Building Name</label>
+									<div>{{userData.communicationAdd.premisesAndBuildingName || 'N.A'}}</div>
+								</div>
+                                                            
+                                                                <div class="col-md-3">
+									<label>Street Name</label>
+									<div>{{userData.communicationAdd.streetName || 'N.A'}}</div>
+								</div>
+
+								<div class="col-md-3">
+									<label>Land Mark</label>
+									<div>{{userData.communicationAdd.landMark || 'N.A'}}</div>
+								</div>
+
+								<div class="col-md-12">
+									<br>
+								</div>
+
+								<div class="col-md-3">
+									<label>City</label>
+									<div>{{userData.communicationAdd.city.name || 'N.A'}}</div>
+								</div>
+
+								<div class="col-md-3">
+									<label>State</label>
+									<div>{{userData.communicationAdd.state.name || 'N.A'}}</div>
+								</div>
+
+								<div class="col-md-3">
+									<label>Country</label>
+									<div>{{userData.communicationAdd.country.name || 'N.A'}}</div>
+								</div>
+
+								<div class="col-md-3">
+									<label>Pincode</label>
+									<div>{{userData.communicationAdd.pincode || 'N.A'}}</div>
+								</div>
 							</div>
-						</div>
+							</div>
 					</div>
 					
 					<!-- Loan Details -->
