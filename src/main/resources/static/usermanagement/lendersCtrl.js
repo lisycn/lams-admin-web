@@ -52,6 +52,7 @@ angular.module("lamsAdmin").controller("lendersCtrl", [ "$scope", "$http", "$roo
 			$scope.userData.tempPassword = $scope.userData.password;
 			$scope.userData.userType = Constant.UserType.LENDER.id;
 			$scope.userData.applications = [{"applicationTypeId" : $scope.userData.applicationTypeId}];
+			$scope.userData.isProfileFilled = true;
 			console.log("$scope.userData===>",$scope.userData);
 			userService.updateLenderDetails($scope.userData).then(
 				function(success) {
